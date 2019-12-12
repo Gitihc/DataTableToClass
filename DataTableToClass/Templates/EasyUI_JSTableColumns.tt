@@ -1,0 +1,9 @@
+﻿<#@ template language="VB" #>
+//formatMoney
+//formatDate
+columns: [[
+	{ field: 'chk', checkbox: true }
+<# For Each column in listColumns #>
+	,{ field: '<#=column.ColumnName#>', title: '<#=column.Remark#>', width: 150, align: "left", halign: "center", fixed: false, hidden: false }
+<# Next #>
+]]

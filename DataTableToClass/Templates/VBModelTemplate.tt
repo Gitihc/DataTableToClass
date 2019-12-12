@@ -1,0 +1,46 @@
+﻿<#@ template language="VB" #>
+
+Imports System.Data.Entity.ModelConfiguration
+
+''' <summary>
+''' 
+''' </summary>
+''' <remarks></remarks>
+Public Class <#= modelName#>
+
+<# For Each column in listColumns #>
+
+	''' <summary>
+	''' <#=column.Remark#>
+	''' </summary>
+	''' <value></value>
+	''' <returns></returns>
+	''' <remarks></remarks>
+	Public Property <#=column.ColumnName#> As <#= column.CSharpType#><# if(column.CommonType.IsValueType andalso column.IsNullable)#>?<#End If#>
+
+<# Next #>
+
+	Public Sub New()
+<# For Each column in listColumns #>
+<# if(column.DefaultValue.length > 0) #>
+		Me.<#=column.ColumnName#> = <#=column.DefaultValue #>
+<#End If#>
+<# Next #>
+	End Sub
+
+End Class
+
+Partial Public Class <#= mapName#>
+    Inherits EntityTypeConfiguration(Of <#= modelName#>)
+	Public Sub New()
+		Me.ToTable("<#= tableName#>")
+<#For Each column in listColumns 
+If column.IsPrimaryKey then#>
+		Me.HasKey(Function(s) s.<#=column.ColumnName#>)
+<#Else#>
+		Me.Property(Function(t) t.<#=column.ColumnName#>)
+<#End If
+Next#>
+
+	End Sub
+End Class

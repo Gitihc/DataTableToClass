@@ -1,0 +1,6 @@
+﻿<#@ template language="VB" #>
+
+Public Class <#=repositoryName#>
+    Inherits BaseRepository(Of <#=modelName#>)
+
+End Class

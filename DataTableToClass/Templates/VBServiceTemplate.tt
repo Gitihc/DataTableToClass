@@ -1,0 +1,6 @@
+﻿<#@ template language="VB" #>
+
+Public Class <#= serviceName#>
+    Inherits BaseServices(Of <#= modelName#>)
+
+End Class
