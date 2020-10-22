@@ -12,50 +12,7 @@
 <System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "10.0.0.0")>  _
 Partial Public Class VBServiceTemplate
     Inherits VBServiceTemplateBase
-    #Region "ToString Helpers"
-    '''<summary>
-    '''Utility class to produce culture-oriented representation of an object as a string.
-    '''</summary>
-    Public Class ToStringInstanceHelper
-        Private formatProviderField  As System.IFormatProvider = Global.System.Globalization.CultureInfo.InvariantCulture
-        '''<summary>
-        '''Gets or sets format provider to be used by ToStringWithCulture method.
-        '''</summary>
-        Public Property FormatProvider() As System.IFormatProvider
-            Get
-                Return Me.formatProviderField 
-            End Get
-            Set
-                If (Not (value) Is Nothing) Then
-                    Me.formatProviderField  = value
-                End If
-            End Set
-        End Property
-        '''<summary>
-        '''This is called from the compile/run appdomain to convert objects within an expression block to a string
-        '''</summary>
-        Public Function ToStringWithCulture(ByVal objectToConvert As Object) As String
-            If (objectToConvert Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("objectToConvert")
-            End If
-            Dim t As System.Type = objectToConvert.GetType
-            Dim method As System.Reflection.MethodInfo = t.GetMethod("ToString", New System.Type() {GetType(System.IFormatProvider)})
-            If (method Is Nothing) Then
-                Return objectToConvert.ToString
-            Else
-                Return CType(method.Invoke(objectToConvert, New Object() {Me.formatProviderField }),String)
-            End If
-        End Function
-    End Class
-    Private toStringHelperField As ToStringInstanceHelper = New ToStringInstanceHelper()
-    Public ReadOnly Property ToStringHelper() As ToStringInstanceHelper
-        Get
-            Return Me.toStringHelperField
-        End Get
-    End Property
-    #End Region
     Public Overridable Function TransformText() As String
-        Me.GenerationEnvironment = Nothing
         Me.Write(""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Public Class ")
         
         #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBServiceTemplate.tt",3)
@@ -68,7 +25,16 @@ Partial Public Class VBServiceTemplate
         Me.Write(Me.ToStringHelper.ToStringWithCulture(modelName))
         
         #End ExternalSource
-        Me.Write(")"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"End Class")
+        Me.Write(")"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"#Region ""删除"""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    Public Overloads Shared Function Delete(id As Integer) As "& _ 
+                "Boolean"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        Return Delete(New List(Of Integer) From {id})"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    End Function"& _ 
+                ""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    Public Overloads Shared Function Delete(listId As List(Of Integer)) As B"& _ 
+                "oolean"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        Return EntityHelper.DeleteMul(Of ")
+        
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBServiceTemplate.tt",12)
+        Me.Write(Me.ToStringHelper.ToStringWithCulture(modelName))
+        
+        #End ExternalSource
+        Me.Write(")(Function(x) listId.Contains(x.ID))"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    End Function"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"#End Region"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"End Class")
         Return Me.GenerationEnvironment.ToString
     End Function
 End Class
@@ -247,6 +213,48 @@ Public Class VBServiceTemplateBase
         Me.indentLengths.Clear
         Me.currentIndentField = ""
     End Sub
+    #End Region
+    #Region "ToString Helpers"
+    '''<summary>
+    '''Utility class to produce culture-oriented representation of an object as a string.
+    '''</summary>
+    Public Class ToStringInstanceHelper
+        Private formatProviderField  As System.IFormatProvider = Global.System.Globalization.CultureInfo.InvariantCulture
+        '''<summary>
+        '''Gets or sets format provider to be used by ToStringWithCulture method.
+        '''</summary>
+        Public Property FormatProvider() As System.IFormatProvider
+            Get
+                Return Me.formatProviderField 
+            End Get
+            Set
+                If (Not (value) Is Nothing) Then
+                    Me.formatProviderField  = value
+                End If
+            End Set
+        End Property
+        '''<summary>
+        '''This is called from the compile/run appdomain to convert objects within an expression block to a string
+        '''</summary>
+        Public Function ToStringWithCulture(ByVal objectToConvert As Object) As String
+            If (objectToConvert Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("objectToConvert")
+            End If
+            Dim t As System.Type = objectToConvert.GetType
+            Dim method As System.Reflection.MethodInfo = t.GetMethod("ToString", New System.Type() {GetType(System.IFormatProvider)})
+            If (method Is Nothing) Then
+                Return objectToConvert.ToString
+            Else
+                Return CType(method.Invoke(objectToConvert, New Object() {Me.formatProviderField }),String)
+            End If
+        End Function
+    End Class
+    Private toStringHelperField As ToStringInstanceHelper = New ToStringInstanceHelper()
+    Public ReadOnly Property ToStringHelper() As ToStringInstanceHelper
+        Get
+            Return Me.toStringHelperField
+        End Get
+    End Property
     #End Region
 End Class
 #End Region

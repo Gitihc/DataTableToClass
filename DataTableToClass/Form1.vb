@@ -9,11 +9,14 @@ Public Class Form1
     Dim modelFilePath As String = IO.Path.Combine(basePath, "Models")
     Dim serviceFilePath As String = IO.Path.Combine(basePath, "Services")
     Dim repositoryFilePath As String = IO.Path.Combine(basePath, "Repositories")
+    Dim flowHandlerFilePath As String = IO.Path.Combine(basePath, "FlowHandlers")
+
 
     Private strModelExt As String = "Model"
     Private strMapExt As String = "Map"
     Private strServiceExt As String = "Service"
     Private strRepositoryExt As String = "Repository" '"Service"
+    Private strFlowHandlerExt As String = "FlowHandler"
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
@@ -158,6 +161,7 @@ Public Class Form1
             Dim modelDictionary As New Dictionary(Of String, String)
             Dim repositoryDictionary As New Dictionary(Of String, String)
             Dim serviceDictionary As New Dictionary(Of String, String)
+            Dim flowHandlerDictionary As New Dictionary(Of String, String)
             For Each tbName In listTableName
                 Dim listDbColumns = DbHelper.GetDbColumns(_connectionString, databaseName, tbName)
                 '类、fluentapi Map
@@ -173,6 +177,13 @@ Public Class Form1
                 Dim serviceTp = New VBServiceTemplate(tbName, strModelExt, strServiceExt)
                 Dim serviceContent = serviceTp.TransformText()
                 serviceDictionary.Add(tbName, serviceContent)
+
+                If tbName.EndsWith("Approval") Then
+                    'flowHandler
+                    Dim flowHandlerTp = New VBFlowHandlerTemplate(tbName, strModelExt, strServiceExt)
+                    Dim flowHandlerContent = flowHandlerTp.TransformText()
+                    flowHandlerDictionary.Add(tbName, flowHandlerContent)
+                End If
             Next
 
             Dim arrManual = New List(Of ManualResetEvent)
@@ -184,6 +195,7 @@ Public Class Form1
                                                        Call T4BuildModel(modelDictionary, arrManual)  '生成类、fluentapi Map
                                                        Call T4BuildService(serviceDictionary, arrManual)  'service 
                                                        Call T4BuildRepository(repositoryDictionary, arrManual) 'repository
+                                                       Call T4BuildFlowHandler(flowHandlerDictionary, arrManual) 'flowhandler
                                                        manual.Set()
                                                    End Sub))
 
@@ -194,7 +206,7 @@ Public Class Form1
             System.Diagnostics.Process.Start(basePath)
         End If
     End Sub
-#Region "生成model、Map、Service、Repository"
+#Region "生成model、Map、Service、Repository、FlowHandler"
     Sub T4BuildModel(ByVal modelDictionary As Dictionary(Of String, String), ByRef arrManual As List(Of ManualResetEvent))
         For Each key In modelDictionary.Keys
             Dim filePath As String = IO.Path.Combine(modelFilePath, String.Format("{0}{1}.vb", key, strModelExt))
@@ -215,6 +227,14 @@ Public Class Form1
         For Each key In repositoryDictionary.Keys
             Dim filePath As String = IO.Path.Combine(serviceFilePath, String.Format("{0}{1}.vb", key, strServiceExt))
             Dim content = repositoryDictionary.Item(key)
+            Call BuildFile(filePath, content)
+        Next
+    End Sub
+
+    Sub T4BuildFlowHandler(ByVal flowHandlerDictionary As Dictionary(Of String, String), ByRef arrManual As List(Of ManualResetEvent))
+        For Each key In flowHandlerDictionary.Keys
+            Dim filePath As String = IO.Path.Combine(flowHandlerFilePath, String.Format("{0}{1}.vb", key, strFlowHandlerExt))
+            Dim content = flowHandlerDictionary.Item(key)
             Call BuildFile(filePath, content)
         Next
     End Sub
@@ -272,6 +292,7 @@ Public Class Form1
         If listTableName.Count > 0 Then
             Threading.ThreadPool.QueueUserWorkItem(Sub()
                                                        Call T4EasyUI_JSTableColumn(listTableName)
+                                                       Call SetBtnEasyUI_JSTableColumn(True)    '设置build 按钮可用
                                                    End Sub)
         Else
             Call SetBtnEasyUI_JSTableColumn(True)    '设置build 按钮可用

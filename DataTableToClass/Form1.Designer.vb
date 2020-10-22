@@ -27,6 +27,8 @@ Partial Class Form1
         Me.btn_connect = New System.Windows.Forms.Button()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.rtb_JS = New System.Windows.Forms.RichTextBox()
+        Me.btnEasyUI_JSTableColumn = New System.Windows.Forms.Button()
         Me.chk_selectAll = New System.Windows.Forms.CheckBox()
         Me.btn_Build = New System.Windows.Forms.Button()
         Me.cmb_listDatabaseName = New System.Windows.Forms.ComboBox()
@@ -39,8 +41,6 @@ Partial Class Form1
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.cmb_TemplateList = New System.Windows.Forms.ComboBox()
         Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
-        Me.btnEasyUI_JSTableColumn = New System.Windows.Forms.Button()
-        Me.rtb_JS = New System.Windows.Forms.RichTextBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.gb_ListTable.SuspendLayout()
@@ -66,7 +66,7 @@ Partial Class Form1
         Me.txt_psd.Name = "txt_psd"
         Me.txt_psd.Size = New System.Drawing.Size(175, 21)
         Me.txt_psd.TabIndex = 1
-        Me.txt_psd.Text = "hlcost168"
+        Me.txt_psd.Text = "hl@cost168"
         '
         'btn_connect
         '
@@ -108,6 +108,23 @@ Partial Class Form1
         Me.TabPage1.Text = "TabPage1"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
+        'rtb_JS
+        '
+        Me.rtb_JS.Location = New System.Drawing.Point(760, 20)
+        Me.rtb_JS.Name = "rtb_JS"
+        Me.rtb_JS.Size = New System.Drawing.Size(781, 540)
+        Me.rtb_JS.TabIndex = 13
+        Me.rtb_JS.Text = ""
+        '
+        'btnEasyUI_JSTableColumn
+        '
+        Me.btnEasyUI_JSTableColumn.Location = New System.Drawing.Point(563, 177)
+        Me.btnEasyUI_JSTableColumn.Name = "btnEasyUI_JSTableColumn"
+        Me.btnEasyUI_JSTableColumn.Size = New System.Drawing.Size(148, 24)
+        Me.btnEasyUI_JSTableColumn.TabIndex = 12
+        Me.btnEasyUI_JSTableColumn.Text = "EasyUI_JSTableColumn"
+        Me.btnEasyUI_JSTableColumn.UseVisualStyleBackColor = True
+        '
         'chk_selectAll
         '
         Me.chk_selectAll.AutoSize = True
@@ -141,7 +158,7 @@ Partial Class Form1
         Me.txt_server.Name = "txt_server"
         Me.txt_server.Size = New System.Drawing.Size(175, 21)
         Me.txt_server.TabIndex = 5
-        Me.txt_server.Text = "192.168.2.131"
+        Me.txt_server.Text = "192.168.2.11"
         '
         'gb_ListTable
         '
@@ -185,7 +202,7 @@ Partial Class Form1
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(777, 590)
+        Me.TabPage2.Size = New System.Drawing.Size(742, 590)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "TabPage2"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -204,7 +221,7 @@ Partial Class Form1
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.RichTextBox1)
-        Me.SplitContainer1.Size = New System.Drawing.Size(771, 584)
+        Me.SplitContainer1.Size = New System.Drawing.Size(736, 584)
         Me.SplitContainer1.SplitterDistance = 62
         Me.SplitContainer1.TabIndex = 1
         '
@@ -221,26 +238,9 @@ Partial Class Form1
         Me.RichTextBox1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.RichTextBox1.Location = New System.Drawing.Point(0, 0)
         Me.RichTextBox1.Name = "RichTextBox1"
-        Me.RichTextBox1.Size = New System.Drawing.Size(771, 518)
+        Me.RichTextBox1.Size = New System.Drawing.Size(736, 518)
         Me.RichTextBox1.TabIndex = 0
         Me.RichTextBox1.Text = ""
-        '
-        'btnEasyUI_JSTableColumn
-        '
-        Me.btnEasyUI_JSTableColumn.Location = New System.Drawing.Point(563, 177)
-        Me.btnEasyUI_JSTableColumn.Name = "btnEasyUI_JSTableColumn"
-        Me.btnEasyUI_JSTableColumn.Size = New System.Drawing.Size(148, 24)
-        Me.btnEasyUI_JSTableColumn.TabIndex = 12
-        Me.btnEasyUI_JSTableColumn.Text = "EasyUI_JSTableColumn"
-        Me.btnEasyUI_JSTableColumn.UseVisualStyleBackColor = True
-        '
-        'rtb_JS
-        '
-        Me.rtb_JS.Location = New System.Drawing.Point(760, 20)
-        Me.rtb_JS.Name = "rtb_JS"
-        Me.rtb_JS.Size = New System.Drawing.Size(781, 540)
-        Me.rtb_JS.TabIndex = 13
-        Me.rtb_JS.Text = ""
         '
         'Form1
         '

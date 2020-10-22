@@ -82,6 +82,7 @@
     <Compile Include="Class\DbTable.vb" />
     <Compile Include="Class\SqlServerDbTypeMap.vb" />
     <Compile Include="Class\TemplateClass\EasyUI_JSTableColumns.vb" />
+    <Compile Include="Class\TemplateClass\VBFlowHandlerTemplate.vb" />
     <Compile Include="Class\TemplateClass\VBModelTemplate.vb" />
     <Compile Include="Class\TemplateClass\VBRepositoryTemplate.vb" />
     <Compile Include="Class\TemplateClass\VBServiceTemplate.vb" />
@@ -112,6 +113,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EasyUI_JSTableColumns.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\VBFlowHandlerTemplate.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VBFlowHandlerTemplate.tt</DependentUpon>
     </Compile>
     <Compile Include="Templates\VBModelTemplate.vb">
       <AutoGen>True</AutoGen>
@@ -169,6 +175,10 @@
     <Content Include="Templates\EasyUI_JSTableColumns.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>EasyUI_JSTableColumns.vb</LastGenOutput>
+    </Content>
+    <Content Include="Templates\VBFlowHandlerTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>VBFlowHandlerTemplate.vb</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

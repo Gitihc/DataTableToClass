@@ -13,27 +13,29 @@
 Partial Public Class EasyUI_JSTableColumns
     Inherits EasyUI_JSTableColumnsBase
     Public Overridable Function TransformText() As String
-        Me.Write("//formatMoney"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"//formatDate"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"columns: [["&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9)&"{ field: 'chk', checkbox: true }"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10))
+        Me.Write("//formatMoney"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"//formatDate"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"columns: [["&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9)&"{ field: 'chk', checkbox: true }"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9)&",{ "& _ 
+                "field: 'idx', title: '序号', width: 30, align: ""center"", halign: ""center"", fixed: "& _ 
+                "true, formatter: function (v, r, i) { return i + 1 } }"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10))
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\EasyUI_JSTableColumns.tt",6)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\EasyUI_JSTableColumns.tt",7)
  For Each column in listColumns 
         
         #End ExternalSource
         Me.Write(""&Global.Microsoft.VisualBasic.ChrW(9)&",{ field: '")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\EasyUI_JSTableColumns.tt",7)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\EasyUI_JSTableColumns.tt",8)
         Me.Write(Me.ToStringHelper.ToStringWithCulture(column.ColumnName))
         
         #End ExternalSource
         Me.Write("', title: '")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\EasyUI_JSTableColumns.tt",7)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\EasyUI_JSTableColumns.tt",8)
         Me.Write(Me.ToStringHelper.ToStringWithCulture(column.Remark))
         
         #End ExternalSource
         Me.Write("', width: 150, align: ""left"", halign: ""center"", fixed: false, hidden: false }"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10))
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\EasyUI_JSTableColumns.tt",8)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\EasyUI_JSTableColumns.tt",9)
  Next 
         
         #End ExternalSource

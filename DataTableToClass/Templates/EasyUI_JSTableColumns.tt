@@ -3,6 +3,7 @@
 //formatDate
 columns: [[
 	{ field: 'chk', checkbox: true }
+	,{ field: 'idx', title: '序号', width: 30, align: "center", halign: "center", fixed: true, formatter: function (v, r, i) { return i + 1 } }
 <# For Each column in listColumns #>
 	,{ field: '<#=column.ColumnName#>', title: '<#=column.Remark#>', width: 150, align: "left", halign: "center", fixed: false, hidden: false }
 <# Next #>
