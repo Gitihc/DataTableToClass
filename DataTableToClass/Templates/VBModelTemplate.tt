@@ -1,6 +1,7 @@
 ﻿<#@ template language="VB" #>
 
 Imports System.Data.Entity.ModelConfiguration
+Imports System.ComponentModel
 
 ''' <summary>
 ''' 
@@ -16,6 +17,7 @@ Public Class <#= modelName#>
 	''' <value></value>
 	''' <returns></returns>
 	''' <remarks></remarks>
+	<Description("<#=column.Remark#>")>
 	Public Property <#=column.ColumnName#> As <#= column.CSharpType#><# if(column.CommonType.IsValueType andalso column.IsNullable)#>?<#End If#>
 
 <# Next #>
@@ -38,9 +40,22 @@ Partial Public Class <#= mapName#>
 If column.IsPrimaryKey then#>
 		Me.HasKey(Function(s) s.<#=column.ColumnName#>)
 <#Else#>
-		Me.Property(Function(t) t.<#=column.ColumnName#>)
+		<#
+        Dim suffixStr = ""
+        If column.CommonType = GetType(Decimal) OrElse column.CommonType = GetType(Double) Then
+            suffixStr += ".HasPrecision(18, " + column.Scale + ")"
+        End If
+
+		If column.DefaultValue =  "Now" Then
+			suffixStr += ".HasDatabaseGeneratedOption(DatabaseGeneratedOption.Computed)"
+		End If
+
+		If column.ColumnType.ToString() =  "timestamp" Then
+			suffixStr += ".IsRowVersion()"
+		End If
+		#>
+		Me.Property(Function(t) t.<#=column.ColumnName#>)<#=suffixStr#>
 <#End If
 Next#>
-
 	End Sub
 End Class

@@ -66,7 +66,7 @@ Partial Class Form1
         Me.txt_psd.Name = "txt_psd"
         Me.txt_psd.Size = New System.Drawing.Size(175, 21)
         Me.txt_psd.TabIndex = 1
-        Me.txt_psd.Text = "hl@cost168"
+        Me.txt_psd.Text = "sa123456"
         '
         'btn_connect
         '
@@ -158,7 +158,7 @@ Partial Class Form1
         Me.txt_server.Name = "txt_server"
         Me.txt_server.Size = New System.Drawing.Size(175, 21)
         Me.txt_server.TabIndex = 5
-        Me.txt_server.Text = "192.168.2.11"
+        Me.txt_server.Text = "192.168.2.134"
         '
         'gb_ListTable
         '

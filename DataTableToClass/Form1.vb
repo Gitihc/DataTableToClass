@@ -10,7 +10,7 @@ Public Class Form1
     Dim serviceFilePath As String = IO.Path.Combine(basePath, "Services")
     Dim repositoryFilePath As String = IO.Path.Combine(basePath, "Repositories")
     Dim flowHandlerFilePath As String = IO.Path.Combine(basePath, "FlowHandlers")
-
+    Dim hlspms_flowHandlerFilePath As String = IO.Path.Combine(basePath, "HLSPMSFlowHandlers")
 
     Private strModelExt As String = "Model"
     Private strMapExt As String = "Map"
@@ -162,6 +162,8 @@ Public Class Form1
             Dim repositoryDictionary As New Dictionary(Of String, String)
             Dim serviceDictionary As New Dictionary(Of String, String)
             Dim flowHandlerDictionary As New Dictionary(Of String, String)
+            Dim HLSPMS_flowHandlerDictionary As New Dictionary(Of String, String)
+
             For Each tbName In listTableName
                 Dim listDbColumns = DbHelper.GetDbColumns(_connectionString, databaseName, tbName)
                 '类、fluentapi Map
@@ -178,11 +180,15 @@ Public Class Form1
                 Dim serviceContent = serviceTp.TransformText()
                 serviceDictionary.Add(tbName, serviceContent)
 
-                If tbName.EndsWith("Approval") Then
+                If tbName.EndsWith("Approval") OrElse tbName.EndsWith("Approvals") Then
                     'flowHandler
                     Dim flowHandlerTp = New VBFlowHandlerTemplate(tbName, strModelExt, strServiceExt)
                     Dim flowHandlerContent = flowHandlerTp.TransformText()
                     flowHandlerDictionary.Add(tbName, flowHandlerContent)
+
+                    Dim HLSPMS_flowHandlerTp = New VBHLSPMSFlowHandlerTemplate(tbName, strModelExt, strServiceExt)
+                    Dim HLSPMS_flowHandlerContent = HLSPMS_flowHandlerTp.TransformText()
+                    HLSPMS_flowHandlerDictionary.Add(tbName, HLSPMS_flowHandlerContent)
                 End If
             Next
 
@@ -196,6 +202,7 @@ Public Class Form1
                                                        Call T4BuildService(serviceDictionary, arrManual)  'service 
                                                        Call T4BuildRepository(repositoryDictionary, arrManual) 'repository
                                                        Call T4BuildFlowHandler(flowHandlerDictionary, arrManual) 'flowhandler
+                                                       Call T4BuildHLSPMSFlowHandler(HLSPMS_flowHandlerDictionary, arrManual) 'hlspms_flowhandler
                                                        manual.Set()
                                                    End Sub))
 
@@ -234,6 +241,14 @@ Public Class Form1
     Sub T4BuildFlowHandler(ByVal flowHandlerDictionary As Dictionary(Of String, String), ByRef arrManual As List(Of ManualResetEvent))
         For Each key In flowHandlerDictionary.Keys
             Dim filePath As String = IO.Path.Combine(flowHandlerFilePath, String.Format("{0}{1}.vb", key, strFlowHandlerExt))
+            Dim content = flowHandlerDictionary.Item(key)
+            Call BuildFile(filePath, content)
+        Next
+    End Sub
+
+    Sub T4BuildHLSPMSFlowHandler(ByVal flowHandlerDictionary As Dictionary(Of String, String), ByRef arrManual As List(Of ManualResetEvent))
+        For Each key In flowHandlerDictionary.Keys
+            Dim filePath As String = IO.Path.Combine(hlspms_flowHandlerFilePath, String.Format("{0}{1}.vb", key, strFlowHandlerExt))
             Dim content = flowHandlerDictionary.Item(key)
             Call BuildFile(filePath, content)
         Next

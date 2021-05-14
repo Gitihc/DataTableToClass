@@ -6,75 +6,75 @@ DataTableToClass
 </name>
 </assembly>
 <members>
-<member name="P:DataTableToClass.VBFlowHandlerTemplateBase.GenerationEnvironment">
+<member name="P:DataTableToClass.VBModelTemplateBase.GenerationEnvironment">
 	<summary>
 The string builder that generation-time code is using to assemble generated output
 </summary>
-</member><member name="P:DataTableToClass.VBFlowHandlerTemplateBase.Errors">
+</member><member name="P:DataTableToClass.VBModelTemplateBase.Errors">
 	<summary>
 The error collection for the generation process
 </summary>
-</member><member name="P:DataTableToClass.VBFlowHandlerTemplateBase.indentLengths">
+</member><member name="P:DataTableToClass.VBModelTemplateBase.indentLengths">
 	<summary>
 A list of the lengths of each indent that was added with PushIndent
 </summary>
-</member><member name="P:DataTableToClass.VBFlowHandlerTemplateBase.CurrentIndent">
+</member><member name="P:DataTableToClass.VBModelTemplateBase.CurrentIndent">
 	<summary>
 Gets the current indent we use when adding lines to the output
 </summary>
-</member><member name="P:DataTableToClass.VBFlowHandlerTemplateBase.Session">
+</member><member name="P:DataTableToClass.VBModelTemplateBase.Session">
 	<summary>
 Current transformation session
 </summary>
-</member><member name="M:DataTableToClass.VBFlowHandlerTemplateBase.Write(System.String)">
+</member><member name="M:DataTableToClass.VBModelTemplateBase.Write(System.String)">
 	<summary>
 Write text directly into the generated output
 </summary>
-</member><member name="M:DataTableToClass.VBFlowHandlerTemplateBase.WriteLine(System.String)">
+</member><member name="M:DataTableToClass.VBModelTemplateBase.WriteLine(System.String)">
 	<summary>
 Write text directly into the generated output
 </summary>
-</member><member name="M:DataTableToClass.VBFlowHandlerTemplateBase.Write(System.String,System.Object[])">
+</member><member name="M:DataTableToClass.VBModelTemplateBase.Write(System.String,System.Object[])">
 	<summary>
 Write formatted text directly into the generated output
 </summary>
-</member><member name="M:DataTableToClass.VBFlowHandlerTemplateBase.WriteLine(System.String,System.Object[])">
+</member><member name="M:DataTableToClass.VBModelTemplateBase.WriteLine(System.String,System.Object[])">
 	<summary>
 Write formatted text directly into the generated output
 </summary>
-</member><member name="M:DataTableToClass.VBFlowHandlerTemplateBase.Error(System.String)">
+</member><member name="M:DataTableToClass.VBModelTemplateBase.Error(System.String)">
 	<summary>
 Raise an error
 </summary>
-</member><member name="M:DataTableToClass.VBFlowHandlerTemplateBase.Warning(System.String)">
+</member><member name="M:DataTableToClass.VBModelTemplateBase.Warning(System.String)">
 	<summary>
 Raise a warning
 </summary>
-</member><member name="M:DataTableToClass.VBFlowHandlerTemplateBase.PushIndent(System.String)">
+</member><member name="M:DataTableToClass.VBModelTemplateBase.PushIndent(System.String)">
 	<summary>
 Increase the indent
 </summary>
-</member><member name="M:DataTableToClass.VBFlowHandlerTemplateBase.PopIndent">
+</member><member name="M:DataTableToClass.VBModelTemplateBase.PopIndent">
 	<summary>
 Remove the last indent that was added with PushIndent
 </summary>
-</member><member name="M:DataTableToClass.VBFlowHandlerTemplateBase.ClearIndent">
+</member><member name="M:DataTableToClass.VBModelTemplateBase.ClearIndent">
 	<summary>
 Remove any indentation
 </summary>
-</member><member name="P:DataTableToClass.VBFlowHandlerTemplateBase.ToStringInstanceHelper.FormatProvider">
+</member><member name="P:DataTableToClass.VBModelTemplateBase.ToStringInstanceHelper.FormatProvider">
 	<summary>
 Gets or sets format provider to be used by ToStringWithCulture method.
 </summary>
-</member><member name="M:DataTableToClass.VBFlowHandlerTemplateBase.ToStringInstanceHelper.ToStringWithCulture(System.Object)">
+</member><member name="M:DataTableToClass.VBModelTemplateBase.ToStringInstanceHelper.ToStringWithCulture(System.Object)">
 	<summary>
 This is called from the compile/run appdomain to convert objects within an expression block to a string
 </summary>
-</member><member name="T:DataTableToClass.VBFlowHandlerTemplateBase.ToStringInstanceHelper">
+</member><member name="T:DataTableToClass.VBModelTemplateBase.ToStringInstanceHelper">
 	<summary>
 Utility class to produce culture-oriented representation of an object as a string.
 </summary>
-</member><member name="T:DataTableToClass.VBFlowHandlerTemplateBase">
+</member><member name="T:DataTableToClass.VBModelTemplateBase">
 	<summary>
 Base class for this transformation
 </summary>
@@ -150,75 +150,75 @@ Utility class to produce culture-oriented representation of an object as a strin
 	<summary>
 Base class for this transformation
 </summary>
-</member><member name="P:DataTableToClass.VBModelTemplateBase.GenerationEnvironment">
+</member><member name="P:DataTableToClass.VBFlowHandlerTemplateBase.GenerationEnvironment">
 	<summary>
 The string builder that generation-time code is using to assemble generated output
 </summary>
-</member><member name="P:DataTableToClass.VBModelTemplateBase.Errors">
+</member><member name="P:DataTableToClass.VBFlowHandlerTemplateBase.Errors">
 	<summary>
 The error collection for the generation process
 </summary>
-</member><member name="P:DataTableToClass.VBModelTemplateBase.indentLengths">
+</member><member name="P:DataTableToClass.VBFlowHandlerTemplateBase.indentLengths">
 	<summary>
 A list of the lengths of each indent that was added with PushIndent
 </summary>
-</member><member name="P:DataTableToClass.VBModelTemplateBase.CurrentIndent">
+</member><member name="P:DataTableToClass.VBFlowHandlerTemplateBase.CurrentIndent">
 	<summary>
 Gets the current indent we use when adding lines to the output
 </summary>
-</member><member name="P:DataTableToClass.VBModelTemplateBase.Session">
+</member><member name="P:DataTableToClass.VBFlowHandlerTemplateBase.Session">
 	<summary>
 Current transformation session
 </summary>
-</member><member name="M:DataTableToClass.VBModelTemplateBase.Write(System.String)">
+</member><member name="M:DataTableToClass.VBFlowHandlerTemplateBase.Write(System.String)">
 	<summary>
 Write text directly into the generated output
 </summary>
-</member><member name="M:DataTableToClass.VBModelTemplateBase.WriteLine(System.String)">
+</member><member name="M:DataTableToClass.VBFlowHandlerTemplateBase.WriteLine(System.String)">
 	<summary>
 Write text directly into the generated output
 </summary>
-</member><member name="M:DataTableToClass.VBModelTemplateBase.Write(System.String,System.Object[])">
+</member><member name="M:DataTableToClass.VBFlowHandlerTemplateBase.Write(System.String,System.Object[])">
 	<summary>
 Write formatted text directly into the generated output
 </summary>
-</member><member name="M:DataTableToClass.VBModelTemplateBase.WriteLine(System.String,System.Object[])">
+</member><member name="M:DataTableToClass.VBFlowHandlerTemplateBase.WriteLine(System.String,System.Object[])">
 	<summary>
 Write formatted text directly into the generated output
 </summary>
-</member><member name="M:DataTableToClass.VBModelTemplateBase.Error(System.String)">
+</member><member name="M:DataTableToClass.VBFlowHandlerTemplateBase.Error(System.String)">
 	<summary>
 Raise an error
 </summary>
-</member><member name="M:DataTableToClass.VBModelTemplateBase.Warning(System.String)">
+</member><member name="M:DataTableToClass.VBFlowHandlerTemplateBase.Warning(System.String)">
 	<summary>
 Raise a warning
 </summary>
-</member><member name="M:DataTableToClass.VBModelTemplateBase.PushIndent(System.String)">
+</member><member name="M:DataTableToClass.VBFlowHandlerTemplateBase.PushIndent(System.String)">
 	<summary>
 Increase the indent
 </summary>
-</member><member name="M:DataTableToClass.VBModelTemplateBase.PopIndent">
+</member><member name="M:DataTableToClass.VBFlowHandlerTemplateBase.PopIndent">
 	<summary>
 Remove the last indent that was added with PushIndent
 </summary>
-</member><member name="M:DataTableToClass.VBModelTemplateBase.ClearIndent">
+</member><member name="M:DataTableToClass.VBFlowHandlerTemplateBase.ClearIndent">
 	<summary>
 Remove any indentation
 </summary>
-</member><member name="P:DataTableToClass.VBModelTemplateBase.ToStringInstanceHelper.FormatProvider">
+</member><member name="P:DataTableToClass.VBFlowHandlerTemplateBase.ToStringInstanceHelper.FormatProvider">
 	<summary>
 Gets or sets format provider to be used by ToStringWithCulture method.
 </summary>
-</member><member name="M:DataTableToClass.VBModelTemplateBase.ToStringInstanceHelper.ToStringWithCulture(System.Object)">
+</member><member name="M:DataTableToClass.VBFlowHandlerTemplateBase.ToStringInstanceHelper.ToStringWithCulture(System.Object)">
 	<summary>
 This is called from the compile/run appdomain to convert objects within an expression block to a string
 </summary>
-</member><member name="T:DataTableToClass.VBModelTemplateBase.ToStringInstanceHelper">
+</member><member name="T:DataTableToClass.VBFlowHandlerTemplateBase.ToStringInstanceHelper">
 	<summary>
 Utility class to produce culture-oriented representation of an object as a string.
 </summary>
-</member><member name="T:DataTableToClass.VBModelTemplateBase">
+</member><member name="T:DataTableToClass.VBFlowHandlerTemplateBase">
 	<summary>
 Base class for this transformation
 </summary>
@@ -330,6 +330,78 @@ Base class for this transformation
  表字段结构
  </summary>
 	<remarks></remarks>
+</member><member name="P:DataTableToClass.VBHLSPMSFlowHandlerTemplateBase.GenerationEnvironment">
+	<summary>
+The string builder that generation-time code is using to assemble generated output
+</summary>
+</member><member name="P:DataTableToClass.VBHLSPMSFlowHandlerTemplateBase.Errors">
+	<summary>
+The error collection for the generation process
+</summary>
+</member><member name="P:DataTableToClass.VBHLSPMSFlowHandlerTemplateBase.indentLengths">
+	<summary>
+A list of the lengths of each indent that was added with PushIndent
+</summary>
+</member><member name="P:DataTableToClass.VBHLSPMSFlowHandlerTemplateBase.CurrentIndent">
+	<summary>
+Gets the current indent we use when adding lines to the output
+</summary>
+</member><member name="P:DataTableToClass.VBHLSPMSFlowHandlerTemplateBase.Session">
+	<summary>
+Current transformation session
+</summary>
+</member><member name="M:DataTableToClass.VBHLSPMSFlowHandlerTemplateBase.Write(System.String)">
+	<summary>
+Write text directly into the generated output
+</summary>
+</member><member name="M:DataTableToClass.VBHLSPMSFlowHandlerTemplateBase.WriteLine(System.String)">
+	<summary>
+Write text directly into the generated output
+</summary>
+</member><member name="M:DataTableToClass.VBHLSPMSFlowHandlerTemplateBase.Write(System.String,System.Object[])">
+	<summary>
+Write formatted text directly into the generated output
+</summary>
+</member><member name="M:DataTableToClass.VBHLSPMSFlowHandlerTemplateBase.WriteLine(System.String,System.Object[])">
+	<summary>
+Write formatted text directly into the generated output
+</summary>
+</member><member name="M:DataTableToClass.VBHLSPMSFlowHandlerTemplateBase.Error(System.String)">
+	<summary>
+Raise an error
+</summary>
+</member><member name="M:DataTableToClass.VBHLSPMSFlowHandlerTemplateBase.Warning(System.String)">
+	<summary>
+Raise a warning
+</summary>
+</member><member name="M:DataTableToClass.VBHLSPMSFlowHandlerTemplateBase.PushIndent(System.String)">
+	<summary>
+Increase the indent
+</summary>
+</member><member name="M:DataTableToClass.VBHLSPMSFlowHandlerTemplateBase.PopIndent">
+	<summary>
+Remove the last indent that was added with PushIndent
+</summary>
+</member><member name="M:DataTableToClass.VBHLSPMSFlowHandlerTemplateBase.ClearIndent">
+	<summary>
+Remove any indentation
+</summary>
+</member><member name="P:DataTableToClass.VBHLSPMSFlowHandlerTemplateBase.ToStringInstanceHelper.FormatProvider">
+	<summary>
+Gets or sets format provider to be used by ToStringWithCulture method.
+</summary>
+</member><member name="M:DataTableToClass.VBHLSPMSFlowHandlerTemplateBase.ToStringInstanceHelper.ToStringWithCulture(System.Object)">
+	<summary>
+This is called from the compile/run appdomain to convert objects within an expression block to a string
+</summary>
+</member><member name="T:DataTableToClass.VBHLSPMSFlowHandlerTemplateBase.ToStringInstanceHelper">
+	<summary>
+Utility class to produce culture-oriented representation of an object as a string.
+</summary>
+</member><member name="T:DataTableToClass.VBHLSPMSFlowHandlerTemplateBase">
+	<summary>
+Base class for this transformation
+</summary>
 </member><member name="P:DataTableToClass.EasyUI_JSTableColumnsBase.GenerationEnvironment">
 	<summary>
 The string builder that generation-time code is using to assemble generated output

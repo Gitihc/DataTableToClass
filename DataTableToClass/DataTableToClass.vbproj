@@ -83,6 +83,7 @@
     <Compile Include="Class\SqlServerDbTypeMap.vb" />
     <Compile Include="Class\TemplateClass\EasyUI_JSTableColumns.vb" />
     <Compile Include="Class\TemplateClass\VBFlowHandlerTemplate.vb" />
+    <Compile Include="Class\TemplateClass\VBHLSPMSFlowHandlerTemplate.vb" />
     <Compile Include="Class\TemplateClass\VBModelTemplate.vb" />
     <Compile Include="Class\TemplateClass\VBRepositoryTemplate.vb" />
     <Compile Include="Class\TemplateClass\VBServiceTemplate.vb" />
@@ -118,6 +119,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>VBFlowHandlerTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\VBHLSPMSFlowHandlerTemplate.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VBHLSPMSFlowHandlerTemplate.tt</DependentUpon>
     </Compile>
     <Compile Include="Templates\VBModelTemplate.vb">
       <AutoGen>True</AutoGen>
@@ -179,6 +185,10 @@
     <Content Include="Templates\VBFlowHandlerTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>VBFlowHandlerTemplate.vb</LastGenOutput>
+    </Content>
+    <Content Include="Templates\VBHLSPMSFlowHandlerTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>VBHLSPMSFlowHandlerTemplate.vb</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

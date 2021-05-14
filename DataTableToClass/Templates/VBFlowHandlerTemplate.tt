@@ -1,10 +1,30 @@
 ﻿<#@ template language="VB" #>
 
-Public Class  <#= flowHandlerName#>
-    Implements IApprovalHandler
+Public Class <#= flowHandlerName#>
+    Implements IFlowHandler
 
-	 Public Function GetFlowStepByID(id As Integer) As ApprovalBase Implements IApprovalHandler.GetFlowStepByID
-        Return EntityHelper.GetFristDefault(Of  <#= modelName#>)(Function(x) x.ID = id)
+#Region "FlowStep相关"
+	''' <summary>
+    ''' 设置第一步
+    ''' </summary>
+    ''' <param name="dType"></param>
+    ''' <param name="projectId"></param>
+    ''' <param name="listId"></param>
+    ''' <param name="listCode"></param>
+    ''' <param name="userId"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function SetFirstFlowStep(dType As ApprovalTypeEnum, projectId As Integer, listId As Integer, listCode As String, userId As String) As Boolean Implements IFlowHandler.SetFirstFlowStep
+        Return FlowHandlerCommon.SetFirstFlowStep(Of <#= modelName#>)(dType, projectId, listId, listCode, userId, Me)
+    End Function
+    ''' <summary>
+    ''' 通过id获取审批步骤
+    ''' </summary>
+    ''' <param name="id"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function GetFlowStepByID(id As Integer) As ApprovalBase Implements IFlowHandler.GetFlowStepByID
+        Return EntityHelper.GetFristDefault(Of <#= modelName#>)(Function(x) x.ID = id)
     End Function
 
     ''' <summary>
@@ -13,8 +33,8 @@ Public Class  <#= flowHandlerName#>
     ''' <param name="lid"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function GetNextFlowStep(lid As Integer) As ApprovalBase Implements IApprovalHandler.GetNextFlowStep
-        Return ApprovalHandlerCommon.GetNextStepApproval(Of <#= modelName#>)(lid)
+    Public Function GetNextFlowStep(lid As Integer) As ApprovalBase Implements IFlowHandler.GetNextFlowStep
+        Return FlowHandlerCommon.GetNextStepApproval(Of <#= modelName#>)(lid)
     End Function
 
     ''' <summary>
@@ -23,8 +43,8 @@ Public Class  <#= flowHandlerName#>
     ''' <param name="lid"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function GetFirstFlowStep(lid As Integer) As ApprovalBase Implements IApprovalHandler.GetFirstFlowStep
-        Return ApprovalHandlerCommon.GetFirstFlowStep(Of <#= modelName#>)(lid)
+    Public Function GetFirstFlowStep(lid As Integer) As ApprovalBase Implements IFlowHandler.GetFirstFlowStep
+        Return FlowHandlerCommon.GetFirstFlowStep(Of <#= modelName#>)(lid)
     End Function
     ''' <summary>
     ''' 获取当前审批
@@ -32,12 +52,12 @@ Public Class  <#= flowHandlerName#>
     ''' <param name="lid"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function GetCurrentFlowStep(lid As Integer) As ApprovalBase Implements IApprovalHandler.GetCurrentFlowStep
-        Return ApprovalHandlerCommon.GetCurrentStepApproval(Of <#= modelName#>)(lid)
+    Public Function GetCurrentFlowStep(lid As Integer) As ApprovalBase Implements IFlowHandler.GetCurrentFlowStep
+        Return FlowHandlerCommon.GetCurrentFlowStep(Of <#= modelName#>)(lid)
     End Function
 
-    Public Function GetApprovaList(projectId As Integer, jid As Integer) As String Implements IApprovalHandler.GetApprovaList
-        Dim listModel = EntityHelper.GetSelect(Of <#= modelName#>)(Function(x) x.PID = projectId AndAlso x.SID = jid)
+    Public Function GetFlowListInfo(projectId As Integer, lid As Integer) As String Implements IFlowHandler.GetFlowListInfo
+        Dim listModel = EntityHelper.GetSelect(Of <#= modelName#>)(Function(x) x.PID = projectId AndAlso x.SID = lid)
         For Each model In listModel
             With model
                 If String.IsNullOrEmpty(.ApproverIds) Then
@@ -45,45 +65,53 @@ Public Class  <#= flowHandlerName#>
                 End If
             End With
         Next
-        Dim result = (From m In listModel
-                  Select New With {
-                        m.ID,
-                        m.PID,
-                        m.JID,
-                        m.State,
-                        m.IDX,
-                        m.ApproverIds,
-                        m.ExMode,
-                        m.ExDate,
-                        m.ExChecked,
-                        m.ExResult,
-                        m.StepName,
-                        m.StepCruces,
-                        m.Note,
-                        m.RoleIds,
-                        Key .StateName = DataMapServices.GetApproveStateName(m.State),
-                        Key .RoleName = m.RoleNames,
-                        Key .ApproveName = m.ApproverNames,
-                        Key .ProjectName = ProjectServices.GetProjectName(m.PID)
-                   })
+
+        Dim result = AutoMapperHelper.MapToList(Of FlowView)(listModel)
+        For Each itm In result
+            itm.StateName = DataMapServices.GetApproveStateName(itm.State)
+            itm.RoleName = itm.RoleNames
+            itm.ApproveName = itm.ApproverNames
+            itm.ProjectName = ProjectServices.GetProjectName(projectId)
+        Next
+
         Dim rztStr = ObjectToJSON(result)
         rztStr = RegexDate(rztStr)
         Return rztStr
     End Function
-
-    Public Function GetFlowlist(lid As Integer) As System.Collections.Generic.List(Of ApprovalBase) Implements IApprovalHandler.GetFlowlist
-        Return ApprovalHandlerCommon.GetFlowlist(Of <#= modelName#>)(lid).ToList
+    ''' <summary>
+    ''' 获取审批集合
+    ''' </summary>
+    ''' <param name="lid"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function GetFlowlist(lid As Integer) As System.Collections.Generic.List(Of ApprovalBase) Implements IFlowHandler.GetFlowlist
+        Return FlowHandlerCommon.GetFlowlist(Of <#= modelName#>)(lid).ToList
     End Function
-
-    Public Function GetNextStepByID(lid As Integer, stepId As Integer) As ApprovalBase Implements IApprovalHandler.GetNextStepByID
-        Return ApprovalHandlerCommon.GetNextStepApproval(Of <#= modelName#>)(lid)
+    ''' <summary>
+    ''' 获取下一步审批
+    ''' </summary>
+    ''' <param name="lid"></param>
+    ''' <param name="stepId"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function GetNextStepByID(lid As Integer, stepId As Integer) As ApprovalBase Implements IFlowHandler.GetNextStepByID
+        Dim listEntity = FlowHandlerCommon.GetFlowlist(Of <#= modelName#>)(lid)
+        Return (From p In listEntity Where p.ID > stepId).FirstOrDefault
     End Function
-
-    Public Function Update(model As ApprovalBase) As Boolean Implements IApprovalHandler.Update
+    ''' <summary>
+    ''' 更新方法
+    ''' </summary>
+    ''' <param name="model"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Update(model As ApprovalBase) As Boolean Implements IFlowHandler.Update
         Return EntityHelper.Update(Of <#= modelName#>)(model)
     End Function
 
-   ''' <summary>
+#End Region
+
+#Region "审批处理相关"
+    ''' <summary>
     ''' 设置流程审批人
     ''' </summary>
     ''' <param name="projectId"></param>
@@ -91,8 +119,8 @@ Public Class  <#= flowHandlerName#>
     ''' <param name="approver"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function SetFlowStepUser(projectId As Integer, stepId As Integer, approver As String) As Boolean Implements IApprovalHandler.SetFlowStepUser
-        Return ApprovalHandlerCommon.SetFlowStepApprover(Of <#= modelName#>)(projectId, stepId, approver)
+    Public Function SetFlowStepUser(projectId As Integer, stepId As Integer, approver As String) As Boolean Implements IFlowHandler.SetFlowStepUser
+        Return FlowHandlerCommon.SetFlowStepApprover(Of <#= modelName#>)(projectId, stepId, approver)
     End Function
 
     ''' <summary>
@@ -111,11 +139,11 @@ Public Class  <#= flowHandlerName#>
                                   lid As Integer,
                                   curUserId As Integer,
                                   approvalResult As Integer,
-                                  curStepId As Integer) As Integer Implements IApprovalHandler.IsNeedSetFlowUser
+                                  curStepId As Integer) As Integer Implements IFlowHandler.IsNeedSetFlowUser
         Dim obj = <#= lidServiceName#>.Get(lid)
         Dim curFlowStep = <#= serviceName#>.GetCurrentStepApproval(lid)
 
-        Return ApprovalHandlerCommon.CheckApproval(applyType, projectId, lid, obj.PlanCode, obj.PlanName, curUserId, approvalResult, curFlowStep, Me)
+        Return FlowHandlerCommon.IsNeedSetFlowUser(applyType, projectId, lid, obj.Code, obj.Name, curUserId, approvalResult, curFlowStep, Me)
     End Function
 
     ''' <summary>
@@ -125,33 +153,53 @@ Public Class  <#= flowHandlerName#>
     ''' <param name="stepId"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function IsLastStepFlowStep(lid As Integer, stepId As Integer) As Boolean Implements IApprovalHandler.IsLastStepFlowStep
-        Return ApprovalHandlerCommon.IsLastStepFlowStep(Of <#= modelName#>)(lid, stepId)
+    Public Function IsLastStepFlowStep(lid As Integer, stepId As Integer) As Boolean Implements IFlowHandler.IsLastStepFlowStep
+        Return FlowHandlerCommon.IsLastStepFlowStep(Of <#=modelName#>)(lid, stepId)
     End Function
-    
+
     ''' <summary>
     ''' 判断是否存在审批流程
     ''' </summary>
     ''' <param name="lid"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function IsExistApprovalFlow(lid As Integer) As Boolean Implements IApprovalHandler.IsExistApprovalFlow
-        Return ApprovalHandlerCommon.IsExistApprovalFlow(Of <#= modelName#>)(lid)
+    Public Function IsExistFlow(lid As Integer) As Boolean Implements IFlowHandler.IsExistFlow
+        Return FlowHandlerCommon.IsExistFlow(Of <#= modelName#>)(lid)
     End Function
 
-    Public Sub DoFuncAfterFinishFlow(aplType As Integer, projectId As Integer, lastApprovalStepModel As ApprovalBase) Implements IApprovalHandler.DoFuncAfterFinishFlow
+    ''' <summary>
+    ''' 审批完成后执行的方法
+    ''' </summary>
+    ''' <param name="aplType"></param>
+    ''' <param name="projectId"></param>
+    ''' <param name="lastApprovalStepModel"></param>
+    ''' <remarks></remarks>
+    Public Sub DoFuncAfterFinishFlow(aplType As Integer, projectId As Integer, lastApprovalStepModel As ApprovalBase) Implements IFlowHandler.DoFuncAfterFinishFlow
         Call <#= serviceName#>.FinishFunc(aplType, projectId, lastApprovalStepModel)
     End Sub
 
-    Public Function SubmitFlow(applyType As ApprovalTypeEnum, curUserId As Integer, projectId As Integer, lid As Integer, stepId As Integer, opinion As String, approvalResult As Integer) As Boolean Implements IApprovalHandler.SubmitFlow
-        Dim lidCode As String = <#= lidServiceName#>.GetCode(lid)
+    ''' <summary>
+    ''' 提交审批
+    ''' </summary>
+    ''' <param name="applyType"></param>
+    ''' <param name="curUserId"></param>
+    ''' <param name="projectId"></param>
+    ''' <param name="lid"></param>
+    ''' <param name="stepId"></param>
+    ''' <param name="opinion"></param>
+    ''' <param name="approvalResult"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function SubmitFlow(applyType As ApprovalTypeEnum, curUserId As Integer, projectId As Integer, lid As Integer, stepId As Integer, opinion As String, approvalResult As Integer) As Boolean Implements IFlowHandler.SubmitFlow
+        Dim obj = <#= lidServiceName#>.Get(lid)
+        If IsNothing(obj) Then Return False
+		Dim lidCode As String = <#= lidServiceName#>.GetCode(lid) 'obj.Code
         Dim curFlowStep = Me.GetCurrentFlowStep(lid)
-        Return ApprovalHandlerCommon.SubmitApproval(applyType, curUserId, projectId, lid, lidCode, opinion, approvalResult,
+        Return FlowHandlerCommon.SubmitApproval(applyType, curUserId, projectId, lid, lidCode, opinion, approvalResult,
                                                AddressOf <#= serviceName#>.FinishFunc,
                                                AddressOf <#= serviceName#>.RejectFunc,
                                                curFlowStep, Me)
     End Function
-
 
     ''' <summary>
     ''' 获取提交人
@@ -159,9 +207,11 @@ Public Class  <#= flowHandlerName#>
     ''' <param name="lid"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function GetOriginator(lid As Integer) As String Implements IApprovalHandler.GetOriginator
-        Return ApprovalHandlerCommon.GetOriginator(Of <#= modelName#>)(lid)
+    Public Function GetOriginator(lid As Integer) As String Implements IFlowHandler.GetOriginator
+        Return FlowHandlerCommon.GetOriginator(Of <#= modelName#>)(lid)
     End Function
+
+#End Region
 
 #Region "单据相关"
     ''' <summary>
@@ -170,13 +220,13 @@ Public Class  <#= flowHandlerName#>
     ''' <param name="id"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function GetLidInfo(id As Integer) As LidInfo Implements IApprovalHandler.GetLidInfo
+    Public Function GetLidInfo(id As Integer) As LidInfo Implements IFlowHandler.GetLidInfo
         Dim model = <#= lidServiceName#>.Get(Function(x) x.ID = id)
         Dim info = New LidInfo
         With info
             .ID = model.ID
-            .Name = model.PlanName
-            .Code = model.PlanCode
+            .Name = model.Name
+            .Code = model.Code
             .ProjectName = ProjectServices.GetProjectName(model.PID)
             .State = model.State
         End With
@@ -188,13 +238,13 @@ Public Class  <#= flowHandlerName#>
     ''' <param name="lidCode"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function GetLidInfo(lidCode As String) As LidInfo Implements IApprovalHandler.GetLidInfo
-        Dim model = <#= lidServiceName#>.Get(Function(x) x.PlanCode = lidCode)
+    Public Function GetLidInfo(lidCode As String) As LidInfo Implements IFlowHandler.GetLidInfo
+        Dim model = <#= lidServiceName#>.Get(Function(x) x.Code = lidCode)
         Dim info = New LidInfo
         With info
             .ID = model.ID
-            .Name = model.PlanName
-            .Code = model.PlanCode
+            .Name = model.Name
+            .Code = model.Code
             .ProjectName = ProjectServices.GetProjectName(model.PID)
             .State = model.State
         End With
@@ -211,8 +261,8 @@ Public Class  <#= flowHandlerName#>
     ''' <param name="CirculatedUserIds"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function SetCirculatedUser(projectId As Integer, stepId As Integer, CirculatedUserIds As String) As Boolean Implements IApprovalHandler.SetCirculatedUser
-        Return ApprovalHandlerCommon.SetCirculatedUser(Of <#= modelName#>)(projectId, stepId, CirculatedUserIds)
+    Public Function SetCirculatedUser(projectId As Integer, stepId As Integer, CirculatedUserIds As String) As Boolean Implements IFlowHandler.SetCirculatedUser
+        Return FlowHandlerCommon.SetCirculatedUser(Of <#= modelName#>)(projectId, stepId, CirculatedUserIds)
     End Function
 
     ''' <summary>
@@ -221,8 +271,8 @@ Public Class  <#= flowHandlerName#>
     ''' <param name="userId"></param>
     ''' <param name="lid"></param>
     ''' <remarks></remarks>
-    Public Sub UpdateIsView(userId As Integer, lid As Integer) Implements IApprovalHandler.UpdateIsView
-        Call ApprovalHandlerCommon.UpdateIsView(Of <#= modelName#>)(userId, lid)
+    Public Sub UpdateIsView(userId As Integer, lid As Integer) Implements IFlowHandler.UpdateIsView
+        Call FlowHandlerCommon.UpdateIsView(Of <#= modelName#>)(userId, lid)
     End Sub
 
     ''' <summary>
@@ -237,8 +287,8 @@ Public Class  <#= flowHandlerName#>
     ''' <param name="approvalHandler"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function IsNeedSetCirculatedUser(applyType As ApprovalTypeEnum, projectId As Integer, lid As Integer, curUserId As Integer, approvalResult As Integer, curFlowStep As ApprovalBase, approvalHandler As IApprovalHandler) As Boolean Implements IApprovalHandler.IsNeedSetCirculatedUser
-        Return ApprovalHandlerCommon.IsNeedSetCirculatedUser(applyType, projectId, lid, curUserId, approvalResult, curFlowStep, approvalHandler)
+    Public Function IsNeedSetCirculatedUser(applyType As ApprovalTypeEnum, projectId As Integer, lid As Integer, curUserId As Integer, approvalResult As Integer, curFlowStep As ApprovalBase, approvalHandler As IFlowHandler) As Boolean Implements IFlowHandler.IsNeedSetCirculatedUser
+        Return FlowHandlerCommon.IsNeedSetCirculatedUser(applyType, projectId, lid, curUserId, approvalResult, curFlowStep, approvalHandler)
     End Function
 
 #End Region
@@ -250,7 +300,7 @@ Public Class  <#= flowHandlerName#>
     ''' <param name="applyType"></param>
     ''' <param name="lid"></param>
     ''' <remarks></remarks>
-    Public Sub UpdateFlowRecord(applyType As ApprovalTypeEnum, lid As Integer) Implements IApprovalHandler.UpdateFlowRecord
+    Public Sub UpdateFlowRecord(applyType As ApprovalTypeEnum, lid As Integer) Implements IFlowHandler.UpdateFlowRecord
         Call <#= lidServiceName#>.UpdateFlowRecord(applyType, lid)
     End Sub
 
@@ -269,8 +319,8 @@ Public Class  <#= flowHandlerName#>
     ''' <param name="approvalHandler"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function ChangeCurStep(aplType As Integer, projectId As Integer, lid As Integer, lidCode As String, userId As Integer, flowStep As ApprovalBase, approvalHandler As IApprovalHandler) As Boolean Implements IApprovalHandler.ChangeCurStep
-        Return ApprovalHandlerCommon.ChangeCurStep(Of <#= modelName#>)(aplType, projectId, lid, lidCode, userId, flowStep, Me)
+    Public Function ChangeCurStep(aplType As Integer, projectId As Integer, lid As Integer, lidCode As String, userId As Integer, flowStep As ApprovalBase, approvalHandler As IFlowHandler) As Boolean Implements IFlowHandler.ChangeCurStep
+        Return FlowHandlerCommon.ChangeCurStep(Of <#= modelName#>)(aplType, projectId, lid, lidCode, userId, flowStep, Me)
     End Function
     ''' <summary>
     ''' 完成审批
@@ -281,8 +331,8 @@ Public Class  <#= flowHandlerName#>
     ''' <param name="lidCode"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function EndApproval(applyType As Integer, projectId As Integer, lid As Integer, lidCode As String) As Boolean Implements IApprovalHandler.EndApproval
-        Return ApprovalHandlerCommon.EndApproval(Of <#= modelName#>)(applyType, projectId, lid, lidCode, Me)
+    Public Function EndApproval(applyType As Integer, projectId As Integer, lid As Integer, lidCode As String) As Boolean Implements IFlowHandler.EndApproval
+        Return FlowHandlerCommon.EndApproval(Of <#= modelName#>)(applyType, projectId, lid, lidCode, Me)
     End Function
 
     ''' <summary>
@@ -295,8 +345,8 @@ Public Class  <#= flowHandlerName#>
     ''' <param name="flowStep"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function RemindApprover(aplType As Integer, projectId As Integer, lid As Integer, lidCode As String, flowStep As ApprovalBase) As Boolean Implements IApprovalHandler.RemindApprover
-        Return ApprovalHandlerCommon.RemindApprover(Of <#= modelName#>)(aplType, projectId, lid, lidCode, flowStep, Me)
+    Public Function RemindApprover(aplType As Integer, projectId As Integer, lid As Integer, lidCode As String, flowStep As ApprovalBase) As Boolean Implements IFlowHandler.RemindApprover
+        Return FlowHandlerCommon.RemindApprover(Of <#= modelName#>)(aplType, projectId, lid, lidCode, flowStep, Me)
     End Function
 #End Region
 
@@ -313,7 +363,7 @@ Public Class  <#= flowHandlerName#>
     ''' <param name="description"></param>
     ''' <param name="btnText"></param>
     ''' <remarks></remarks>
-    Public Sub BuildWebChatMSG(applType As Integer, projectId As Integer, lid As Integer, stepName As String, msgType As Integer, ByRef title As String, ByRef description As String, ByRef btnText As String) Implements IApprovalHandler.BuildWebChatMSG
+    Public Sub BuildWebChatMSG(applType As Integer, projectId As Integer, lid As Integer, stepName As String, msgType As Integer, ByRef title As String, ByRef description As String, ByRef btnText As String) Implements IFlowHandler.BuildWebChatMSG
         <#= lidServiceName#>.BuildWebChatMSG(applType, projectId, lid, stepName, msgType, title, description, btnText)
     End Sub
 
@@ -325,8 +375,9 @@ Public Class  <#= flowHandlerName#>
     ''' <param name="lid">单据id</param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function WebChatBuildListInfo(dataType As Integer, apprlType As Integer, lid As Integer) As String Implements IApprovalHandler.WebChatBuildListInfo
+    Public Function WebChatBuildListInfo(dataType As Integer, apprlType As Integer, lid As Integer) As String Implements IFlowHandler.WebChatBuildListInfo
         Return <#= lidServiceName#>.WebChatBuildListInfo(dataType, apprlType, lid)
     End Function
 #End Region
+
 End Class
