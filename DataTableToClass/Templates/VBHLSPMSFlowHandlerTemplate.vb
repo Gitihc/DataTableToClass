@@ -19,11 +19,20 @@ Partial Public Class VBHLSPMSFlowHandlerTemplate
         Me.Write(Me.ToStringHelper.ToStringWithCulture(flowHandlerName))
         
         #End ExternalSource
-        Me.Write(""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    Implements IFlowHandler"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"#Region ""FlowStep相关"""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    Public Function GetOri"& _ 
-                "ginator(lid As Integer) As String Implements IFlowHandler.GetOriginator"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"       "& _ 
-                " Return FlowHandlerCommon.GetOriginator(Of ")
+        Me.Write(""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    Implements IFlowHandler"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"#Region ""FlowStep相关"""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9)&"Public Function SetFirstF"& _ 
+                "lowStep(dType As ApprovalTypeEnum, projectId As Integer, listId As Integer, user"& _ 
+                "Id As String) As Boolean Implements IFlowHandler.SetFirstFlowStep"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        Retur"& _ 
+                "n FlowHandlerCommon.SetFirstFlowStep(Of ")
         
         #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",7)
+        Me.Write(Me.ToStringHelper.ToStringWithCulture(modelName))
+        
+        #End ExternalSource
+        Me.Write(")(dType, projectId, listId, userId, Me)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    End Function"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    Public Function "& _ 
+                "GetOriginator(lid As Integer) As String Implements IFlowHandler.GetOriginator"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&" "& _ 
+                "       Return FlowHandlerCommon.GetOriginator(Of ")
+        
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",11)
         Me.Write(Me.ToStringHelper.ToStringWithCulture(modelName))
         
         #End ExternalSource
@@ -31,7 +40,7 @@ Partial Public Class VBHLSPMSFlowHandlerTemplate
                 "ring Implements IFlowHandler.GetFlowInfo"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        Dim listModel = EntityHelper.G"& _ 
                 "etSelect(Of ")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",11)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",15)
         Me.Write(Me.ToStringHelper.ToStringWithCulture(modelName))
         
         #End ExternalSource
@@ -48,7 +57,7 @@ Partial Public Class VBHLSPMSFlowHandlerTemplate
                 "yID(Id As Integer) As ApprovalBase Implements IFlowHandler.GetFlowStepByID"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    "& _ 
                 "    Return EntityHelper.GetFristDefault(Of ")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",38)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",42)
         Me.Write(Me.ToStringHelper.ToStringWithCulture(modelName))
         
         #End ExternalSource
@@ -58,23 +67,32 @@ Partial Public Class VBHLSPMSFlowHandlerTemplate
                 "eger) As ApprovalBase Implements IFlowHandler.GetFirstFlowStep"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        Return F"& _ 
                 "lowHandlerCommon.GetFirstFlowStep(Of ")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",47)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",51)
         Me.Write(Me.ToStringHelper.ToStringWithCulture(modelName))
         
         #End ExternalSource
-        Me.Write(")(lid)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    End Function"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <summary>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' 是否需要设置下一步审批人"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' </summ"& _ 
-                "ary>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <param name=""applyType""></param>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <param name=""projectId"">"& _ 
-                "</param>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <param name=""lid""></param>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <param name=""curUserId""></"& _ 
-                "param>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <param name=""approvalResult""></param>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <param name=""curS"& _ 
-                "tepId""></param>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <returns></returns>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <remarks></remarks>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    P"& _ 
-                "ublic Function IsNeedSetFlowUser(applyType As ApprovalTypeEnum, projectId As Int"& _ 
-                "eger, lid As Integer, curUserId As Integer, approvalResult As Integer, curStepId"& _ 
-                " As Integer) As Boolean Implements IFlowHandler.IsNeedSetFlowUser"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        Dim l"& _ 
-                "idInfo = GetLidInfo(lid)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9)&Global.Microsoft.VisualBasic.ChrW(9)&" Dim curFlowStep As Object = Nothing"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        If cur"& _ 
-                "StepId > 0 Then"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"            curFlowStep = GetFlowStepByID(curStepId)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        E"& _ 
-                "lse"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"            curFlowStep = FlowHandlerCommon.GetCurrentFlowStep(Of ")
+        Me.Write(")(lid)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    End Function"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9)&"''' <summary>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' 获取审批最后一步"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' </summary>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <param name=""lid""></param>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <returns></returns>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <remar"& _ 
+                "ks></remarks>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    Public Function GetLastFlowStep(lid As Integer) As ApprovalBa"& _ 
+                "se Implements IFlowHandler.GetLastFlowStep"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        Return FlowHandlerCommon.Get"& _ 
+                "LastFlowStep(Of ")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",66)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",61)
+        Me.Write(Me.ToStringHelper.ToStringWithCulture(modelName))
+        
+        #End ExternalSource
+        Me.Write(")(lid)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    End Function"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <summary>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' 是否需要设置下一步审批人"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' </su"& _ 
+                "mmary>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <param name=""applyType""></param>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <param name=""projectId"& _ 
+                """></param>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <param name=""lid""></param>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <param name=""curUserId"">"& _ 
+                "</param>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <param name=""approvalResult""></param>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <param name=""cu"& _ 
+                "rStepId""></param>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <returns></returns>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <remarks></remarks>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"   "& _ 
+                " Public Function IsNeedSetFlowUser(applyType As ApprovalTypeEnum, projectId As I"& _ 
+                "nteger, lid As Integer, curUserId As Integer, approvalResult As Integer, curStep"& _ 
+                "Id As Integer) As Boolean Implements IFlowHandler.IsNeedSetFlowUser"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        Dim"& _ 
+                " lidInfo = GetLidInfo(lid)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9)&Global.Microsoft.VisualBasic.ChrW(9)&" Dim curFlowStep As Object = Nothing"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        If c"& _ 
+                "urStepId > 0 Then"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"            curFlowStep = GetFlowStepByID(curStepId)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"       "& _ 
+                " Else"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"            curFlowStep = FlowHandlerCommon.GetCurrentFlowStep(Of ")
+        
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",81)
         Me.Write(Me.ToStringHelper.ToStringWithCulture(modelName))
         
         #End ExternalSource
@@ -86,7 +104,7 @@ Partial Public Class VBHLSPMSFlowHandlerTemplate
                 "wStep(lid As Integer) As ApprovalBase Implements IFlowHandler.GetCurrentFlowStep"& _ 
                 ""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        Return FlowHandlerCommon.GetCurrentFlowStep(Of ")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",77)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",92)
         Me.Write(Me.ToStringHelper.ToStringWithCulture(modelName))
         
         #End ExternalSource
@@ -96,7 +114,7 @@ Partial Public Class VBHLSPMSFlowHandlerTemplate
                 "ons.Generic.List(Of ApprovalBase) Implements IFlowHandler.GetFlowlist"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        R"& _ 
                 "eturn FlowHandlerCommon.GetFlowlist(Of ")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",86)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",101)
         Me.Write(Me.ToStringHelper.ToStringWithCulture(modelName))
         
         #End ExternalSource
@@ -104,19 +122,18 @@ Partial Public Class VBHLSPMSFlowHandlerTemplate
                 "mmary>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <param name=""lid""></param>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <param name=""stepId""></param"& _ 
                 ">"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <returns></returns>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <remarks></remarks>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    Public Function"& _ 
                 " GetNextStepByID(lid As Integer, stepId As Integer) As ApprovalBase Implements I"& _ 
-                "FlowHandler.GetNextStepByID"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        Dim listEntity = FlowHandlerCommon.GetFlowl"& _ 
-                "ist(Of ")
+                "FlowHandler.GetNextStepByID"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9)&Global.Microsoft.VisualBasic.ChrW(9)&"Return FlowHandlerCommon.GetNextFlowStep(Of ")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",96)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",111)
         Me.Write(Me.ToStringHelper.ToStringWithCulture(modelName))
         
         #End ExternalSource
-        Me.Write(")(lid)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        Return (From p In listEntity Where p.ID > stepId).FirstOrDefault"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    End Function"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <summary>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' 更新方法"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' </summary>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' "& _ 
-                "<param name=""model""></param>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <returns></returns>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <remarks></re"& _ 
-                "marks>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    Public Function Update(model As ApprovalBase) As Boolean Implements "& _ 
-                "IFlowHandler.Update"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        Return EntityHelper.Update(Of ")
+        Me.Write(")(lid, stepId)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    End Function"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <summary>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' 更新方法"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' </summ"& _ 
+                "ary>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <param name=""model""></param>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <returns></returns>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    '''"& _ 
+                " <remarks></remarks>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    Public Function Update(model As ApprovalBase) As Boole"& _ 
+                "an Implements IFlowHandler.Update"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        Return EntityHelper.Update(Of ")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",106)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",120)
         Me.Write(Me.ToStringHelper.ToStringWithCulture(modelName))
         
         #End ExternalSource
@@ -124,19 +141,19 @@ Partial Public Class VBHLSPMSFlowHandlerTemplate
                 "pdateFlowRecord(applType As ApprovalTypeEnum, lid As Integer) Implements IFlowHa"& _ 
                 "ndler.UpdateFlowRecord"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        Call ")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",112)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",126)
         Me.Write(Me.ToStringHelper.ToStringWithCulture(serviceName))
         
         #End ExternalSource
         Me.Write(".UpdateFlowRecord(applType, lid)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    End Sub"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"#End Region"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"#Region ""审批处理相关"""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&" "& _ 
                 "   ''' <summary>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' 设置步骤审批人"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' </summary>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <param name=""proj"& _ 
-                "ectId""></param>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <param name=""stepId""></param>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <param name=""app"& _ 
-                "rover""></param>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <returns></returns>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <remarks></remarks>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    P"& _ 
-                "ublic Function SetFlowStepUser(projectId As Integer, stepId As Integer, userIds "& _ 
-                "As String) As Boolean Implements IFlowHandler.SetFlowStepUser"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        Return Fl"& _ 
-                "owHandlerCommon.SetFlowStepUser(Of ")
+                "ectId""></param>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <param name=""stepId""></param>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <param name=""use"& _ 
+                "rIds""></param>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <returns></returns>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <remarks></remarks>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    Pu"& _ 
+                "blic Function SetFlowStepUser(projectId As Integer, stepId As Integer, userIds A"& _ 
+                "s String) As Boolean Implements IFlowHandler.SetFlowStepUser"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        Return Flo"& _ 
+                "wHandlerCommon.SetFlowStepUser(Of ")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",126)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",140)
         Me.Write(Me.ToStringHelper.ToStringWithCulture(modelName))
         
         #End ExternalSource
@@ -147,30 +164,39 @@ Partial Public Class VBHLSPMSFlowHandlerTemplate
                 "ean Implements IFlowHandler.IsLastStepFlowStep"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        Return FlowHandlerCommon"& _ 
                 ".IsLastStepFlowStep(Of ")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",137)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",151)
         Me.Write(Me.ToStringHelper.ToStringWithCulture(modelName))
         
         #End ExternalSource
-        Me.Write(")(lid, stepId)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    End Function"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <summary>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' 提交审批"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' </summ"& _ 
-                "ary>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <param name=""applyType""></param>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <param name=""curUserId"">"& _ 
-                "</param>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <param name=""projectId""></param>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <param name=""lid""></"& _ 
-                "param>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <param name=""stepId""></param>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <param name=""opinion""></p"& _ 
-                "aram>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <param name=""approvalResult""></param>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <returns></returns"& _ 
-                ">"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <remarks></remarks>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    Public Function SubmitFlow(applyType As Appr"& _ 
-                "ovalTypeEnum, curUserId As Integer, projectId As Integer, lid As Integer, stepId"& _ 
-                " As Integer, opinion As String, approvalResult As Integer) As Boolean Implements"& _ 
-                " IFlowHandler.SubmitFlow"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        Dim curFlowStep = GetCurrentFlowStep(lid)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&" "& _ 
-                "       Dim result = FlowHandlerCommon.SubmitFlow(applyType, curUserId, projectId"& _ 
-                ", lid, stepId, opinion, approvalResult,"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                       "& _ 
-                "           AddressOf ")
+        Me.Write(")(lid, stepId)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    End Function"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9)&"''' <summary>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' 判断是否存在审批流程"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <"& _ 
+                "/summary>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <param name=""lid""></param>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <returns></returns>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    "& _ 
+                "''' <remarks></remarks>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    Public Function IsExistFlow(lid As Integer) As Bool"& _ 
+                "ean Implements IFlowHandler.IsExistFlow"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        Return FlowHandlerCommon.IsExis"& _ 
+                "tFlow(Of ")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",155)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",161)
+        Me.Write(Me.ToStringHelper.ToStringWithCulture(modelName))
+        
+        #End ExternalSource
+        Me.Write(")(lid)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    End Function"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <summary>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' 提交审批"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' </summary>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)& _ 
+                "    ''' <param name=""applyType""></param>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <param name=""curUserId""></para"& _ 
+                "m>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <param name=""projectId""></param>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <param name=""lid""></param>"& _ 
+                ""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <param name=""stepId""></param>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <param name=""opinion""></param>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <param name=""approvalResult""></param>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    ''' <returns></returns>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"   "& _ 
+                " ''' <remarks></remarks>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    Public Function SubmitFlow(applyType As ApprovalTy"& _ 
+                "peEnum, curUserId As Integer, projectId As Integer, lid As Integer, stepId As In"& _ 
+                "teger, opinion As String, approvalResult As Integer) As Boolean Implements IFlow"& _ 
+                "Handler.SubmitFlow"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        Dim curFlowStep = GetCurrentFlowStep(lid)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"       "& _ 
+                " Dim result = FlowHandlerCommon.SubmitFlow(applyType, curUserId, projectId, lid,"& _ 
+                " stepId, opinion, approvalResult,"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                             "& _ 
+                "     AddressOf ")
+        
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",180)
         Me.Write(Me.ToStringHelper.ToStringWithCulture(serviceName))
         
         #End ExternalSource
         Me.Write(".FinishFunc,"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                                  AddressOf ")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",156)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",181)
         Me.Write(Me.ToStringHelper.ToStringWithCulture(serviceName))
         
         #End ExternalSource
@@ -187,7 +213,7 @@ Partial Public Class VBHLSPMSFlowHandlerTemplate
                 "tepModel As ApprovalBase) Implements IFlowHandler.DoFuncAfterFinishFlow"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"       "& _ 
                 " Call ")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",174)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",199)
         Me.Write(Me.ToStringHelper.ToStringWithCulture(serviceName))
         
         #End ExternalSource
@@ -197,7 +223,7 @@ Partial Public Class VBHLSPMSFlowHandlerTemplate
                 "r) Implements IFlowHandler.ReDoAllFlowStep"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        Call FlowHandlerCommon.ReDoA"& _ 
                 "llFlowStep(Of ")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",182)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",207)
         Me.Write(Me.ToStringHelper.ToStringWithCulture(modelName))
         
         #End ExternalSource
@@ -209,7 +235,7 @@ Partial Public Class VBHLSPMSFlowHandlerTemplate
                 ") As Boolean Implements IFlowHandler.SaveFlowStepAdvice"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        Return FlowHand"& _ 
                 "lerCommon.SaveFlowStepAdvice(Of ")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",194)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",219)
         Me.Write(Me.ToStringHelper.ToStringWithCulture(modelName))
         
         #End ExternalSource
@@ -217,7 +243,7 @@ Partial Public Class VBHLSPMSFlowHandlerTemplate
                 "单据相关"""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    Public Function GetLidInfo(lid As Integer) As LidInfo Implements IFlo"& _ 
                 "wHandler.GetLidInfo"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        Dim model = ")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",200)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",225)
         Me.Write(Me.ToStringHelper.ToStringWithCulture(lidServiceName))
         
         #End ExternalSource
@@ -230,7 +256,7 @@ Partial Public Class VBHLSPMSFlowHandlerTemplate
                 "ith"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        Return info"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    End Function"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9)&"Public Function GetLidInfo1(lidCode"& _ 
                 " As String) As LidInfo Implements IFlowHandler.GetLidInfo"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9)&" Dim model = ")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",217)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",242)
         Me.Write(Me.ToStringHelper.ToStringWithCulture(lidServiceName))
         
         #End ExternalSource
@@ -248,7 +274,7 @@ Partial Public Class VBHLSPMSFlowHandlerTemplate
                 "culatedUserIds As String) As Boolean Implements IFlowHandler.SetCirculatedUser"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)& _ 
                 "        Return FlowHandlerCommon.SetCirculatedUser(Of ")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",245)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",270)
         Me.Write(Me.ToStringHelper.ToStringWithCulture(modelName))
         
         #End ExternalSource
@@ -266,7 +292,7 @@ Partial Public Class VBHLSPMSFlowHandlerTemplate
                 "sView(userId As Integer, lid As Integer) Implements IFlowHandler.UpdateIsView"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&" "& _ 
                 "       Call FlowHandlerCommon.UpdateIsView(Of ")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",270)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",295)
         Me.Write(Me.ToStringHelper.ToStringWithCulture(modelName))
         
         #End ExternalSource
@@ -276,7 +302,7 @@ Partial Public Class VBHLSPMSFlowHandlerTemplate
                 "ng, ByRef description As String, Optional prefixStr As String = """") Implements I"& _ 
                 "FlowHandler.WebChatBuildMSG"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        Call ")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",276)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",301)
         Me.Write(Me.ToStringHelper.ToStringWithCulture(lidServiceName))
         
         #End ExternalSource
@@ -288,7 +314,7 @@ Partial Public Class VBHLSPMSFlowHandlerTemplate
                 " As Integer) As String Implements IFlowHandler.WebChatBuildListApprovalInfo"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"   "& _ 
                 "     Return ")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",287)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",312)
         Me.Write(Me.ToStringHelper.ToStringWithCulture(lidServiceName))
         
         #End ExternalSource
@@ -299,7 +325,7 @@ Partial Public Class VBHLSPMSFlowHandlerTemplate
                 "s Integer, lid As Integer) As String Implements IFlowHandler.WebChatBuildListInf"& _ 
                 "o"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        Return ")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",297)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",322)
         Me.Write(Me.ToStringHelper.ToStringWithCulture(lidServiceName))
         
         #End ExternalSource
@@ -309,7 +335,7 @@ Partial Public Class VBHLSPMSFlowHandlerTemplate
                 "ts IFlowHandler.ChangeCurStep"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        Return FlowHandlerCommon.ChangeCurStep(Of"& _ 
                 " ")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",303)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",328)
         Me.Write(Me.ToStringHelper.ToStringWithCulture(modelName))
         
         #End ExternalSource
@@ -318,7 +344,7 @@ Partial Public Class VBHLSPMSFlowHandlerTemplate
                 "er, lidCode As String, curUserId As Integer) As Boolean Implements IFlowHandler."& _ 
                 "EndApproval"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        Return FlowHandlerCommon.EndApproval(Of ")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",307)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",332)
         Me.Write(Me.ToStringHelper.ToStringWithCulture(modelName))
         
         #End ExternalSource
@@ -327,7 +353,7 @@ Partial Public Class VBHLSPMSFlowHandlerTemplate
                 "dCode As String, stepId As Integer, stepName As String) As Boolean Implements IF"& _ 
                 "lowHandler.RemindApprover"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        Return FlowHandlerCommon.RemindApprover(Of ")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",311)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",336)
         Me.Write(Me.ToStringHelper.ToStringWithCulture(modelName))
         
         #End ExternalSource

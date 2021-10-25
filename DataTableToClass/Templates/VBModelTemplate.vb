@@ -144,7 +144,7 @@ Else
 
         Dim suffixStr = ""
         If column.CommonType = GetType(Decimal) OrElse column.CommonType = GetType(Double) Then
-            suffixStr += ".HasPrecision(18, " + column.Scale + ")"
+            suffixStr += ".HasPrecision(18, " + column.Scale.toString() + ")"
         End If
 
 		If column.DefaultValue =  "Now" Then
@@ -154,24 +154,28 @@ Else
 		If column.ColumnType.ToString() =  "timestamp" Then
 			suffixStr += ".IsRowVersion()"
 		End If
+
+		If column.ColumnType.ToString() =  "varchar" AndAlso column.CharLength >0 Then
+			suffixStr += ".HasMaxLength("& column.CharLength &")"
+		End If
 		
         
         #End ExternalSource
         Me.Write(""&Global.Microsoft.VisualBasic.ChrW(9)&Global.Microsoft.VisualBasic.ChrW(9)&"Me.Property(Function(t) t.")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBModelTemplate.tt",57)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBModelTemplate.tt",61)
         Me.Write(Me.ToStringHelper.ToStringWithCulture(column.ColumnName))
         
         #End ExternalSource
         Me.Write(")")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBModelTemplate.tt",57)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBModelTemplate.tt",61)
         Me.Write(Me.ToStringHelper.ToStringWithCulture(suffixStr))
         
         #End ExternalSource
         Me.Write(""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10))
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBModelTemplate.tt",58)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBModelTemplate.tt",62)
 End If
 Next
         

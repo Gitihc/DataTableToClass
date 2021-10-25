@@ -27,6 +27,7 @@ Partial Class Form1
         Me.btn_connect = New System.Windows.Forms.Button()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.listBox1 = New System.Windows.Forms.ListBox()
         Me.rtb_JS = New System.Windows.Forms.RichTextBox()
         Me.btnEasyUI_JSTableColumn = New System.Windows.Forms.Button()
         Me.chk_selectAll = New System.Windows.Forms.CheckBox()
@@ -54,7 +55,7 @@ Partial Class Form1
         '
         'txt_name
         '
-        Me.txt_name.Location = New System.Drawing.Point(45, 40)
+        Me.txt_name.Location = New System.Drawing.Point(33, 44)
         Me.txt_name.Name = "txt_name"
         Me.txt_name.Size = New System.Drawing.Size(175, 21)
         Me.txt_name.TabIndex = 0
@@ -62,15 +63,15 @@ Partial Class Form1
         '
         'txt_psd
         '
-        Me.txt_psd.Location = New System.Drawing.Point(45, 70)
+        Me.txt_psd.Location = New System.Drawing.Point(33, 74)
         Me.txt_psd.Name = "txt_psd"
         Me.txt_psd.Size = New System.Drawing.Size(175, 21)
         Me.txt_psd.TabIndex = 1
-        Me.txt_psd.Text = "sa123456"
+        Me.txt_psd.Text = "hlcost168"
         '
         'btn_connect
         '
-        Me.btn_connect.Location = New System.Drawing.Point(123, 103)
+        Me.btn_connect.Location = New System.Drawing.Point(111, 107)
         Me.btn_connect.Name = "btn_connect"
         Me.btn_connect.Size = New System.Drawing.Size(97, 24)
         Me.btn_connect.TabIndex = 2
@@ -90,6 +91,7 @@ Partial Class Form1
         '
         'TabPage1
         '
+        Me.TabPage1.Controls.Add(Me.listBox1)
         Me.TabPage1.Controls.Add(Me.rtb_JS)
         Me.TabPage1.Controls.Add(Me.btnEasyUI_JSTableColumn)
         Me.TabPage1.Controls.Add(Me.chk_selectAll)
@@ -107,6 +109,15 @@ Partial Class Form1
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "TabPage1"
         Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'listBox1
+        '
+        Me.listBox1.FormattingEnabled = True
+        Me.listBox1.ItemHeight = 12
+        Me.listBox1.Location = New System.Drawing.Point(281, 16)
+        Me.listBox1.Name = "listBox1"
+        Me.listBox1.Size = New System.Drawing.Size(171, 100)
+        Me.listBox1.TabIndex = 14
         '
         'rtb_JS
         '
@@ -154,11 +165,11 @@ Partial Class Form1
         '
         'txt_server
         '
-        Me.txt_server.Location = New System.Drawing.Point(45, 12)
+        Me.txt_server.Location = New System.Drawing.Point(33, 16)
         Me.txt_server.Name = "txt_server"
         Me.txt_server.Size = New System.Drawing.Size(175, 21)
         Me.txt_server.TabIndex = 5
-        Me.txt_server.Text = "192.168.2.134"
+        Me.txt_server.Text = "192.168.2.131"
         '
         'gb_ListTable
         '
@@ -283,5 +294,6 @@ Partial Class Form1
     Friend WithEvents cmb_TemplateList As System.Windows.Forms.ComboBox
     Friend WithEvents btnEasyUI_JSTableColumn As System.Windows.Forms.Button
     Friend WithEvents rtb_JS As System.Windows.Forms.RichTextBox
+    Friend WithEvents listBox1 As System.Windows.Forms.ListBox
 
 End Class

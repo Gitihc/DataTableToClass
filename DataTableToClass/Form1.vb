@@ -18,25 +18,105 @@ Public Class Form1
     Private strRepositoryExt As String = "Repository" '"Service"
     Private strFlowHandlerExt As String = "FlowHandler"
 
-    Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private databaseInfoPath As String = "databaseInfo.txt"
 
+    Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Try
+            LoadLocationDatabaseInfo()
+            InitListBox()
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+        End Try
     End Sub
 
+#Region "listBox"
+    Public Class DatabaseInfo
+        Public Property Source As String
+        Public Property Name As String
+        Public Property Password As String
+    End Class
+    Private listDatabaseInfo As List(Of DatabaseInfo) = New List(Of DatabaseInfo)
+
+    'From {New DatabaseInfo With {.Source = "192.168.2.11", .Name = "sa", .Password = "hl@cost168"}, New DatabaseInfo With {.Source = "192.168.2.134", .Name = "sa", .Password = "sa123456"}}
+
+    Private Sub InitListBox()
+        listBox1.DisplayMember = "Source"
+        loadListDatabaseInfo()
+    End Sub
+
+    Private Sub loadListDatabaseInfo()
+        listBox1.Items.Clear()
+        For Each databaseInfo In listDatabaseInfo
+            listBox1.Items.Add(databaseInfo)
+        Next
+    End Sub
+
+    Private Sub listBox1_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles listBox1.SelectedIndexChanged
+        Dim databaseInfo As DatabaseInfo = listBox1.SelectedItem
+        If Not IsNothing(databaseInfo) Then
+            With databaseInfo
+                txt_server.Text = .Source
+                txt_name.Text = .Name
+                txt_psd.Text = .Password
+            End With
+        End If
+    End Sub
+
+    Private Sub RecordDatabaseInfo(databaseInfo As DatabaseInfo)
+        If Not IsNothing(databaseInfo) Then
+            Dim count = (From p In listDatabaseInfo Where p.Source = databaseInfo.Source Select p).Count
+            If count = 0 Then
+                listDatabaseInfo.Add(databaseInfo)
+                loadListDatabaseInfo()
+            End If
+        End If
+    End Sub
+
+    '保存到本地
+    Private Sub DatabaseInfoToLocal()
+        Dim strJson = ObjectToJSON(listDatabaseInfo)
+
+        IO.File.WriteAllText(databaseInfoPath, strJson)
+
+    End Sub
+    '读取本地信息
+    Private Sub LoadLocationDatabaseInfo()
+        If IO.File.Exists(databaseInfoPath) Then
+            Dim strJson = IO.File.ReadAllText(databaseInfoPath)
+
+            listDatabaseInfo = JSONToObject(Of List(Of DatabaseInfo))(strJson)
+        End If
+    End Sub
+
+    Private Sub Form1_FormClosing(sender As System.Object, e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
+        Try
+            DatabaseInfoToLocal()
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+        End Try
+    End Sub
+#End Region
 
 #Region "按钮事件"
     Private Sub btn_connect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_connect.Click
-        Dim txtServer = txt_server.Text.Trim
-        Dim txtUser = txt_name.Text.Trim
-        Dim txtPsd = txt_psd.Text.Trim
-        DBUtil._connectionString = String.Format("Data Source={0}; uid={1}; Password={2}", txtServer, txtUser, txtPsd)
-        _connectionString = DBUtil._connectionString
-        Dim dt = getAllDatabase()
+        Try
+            Dim txtServer = txt_server.Text.Trim
+            Dim txtUser = txt_name.Text.Trim
+            Dim txtPsd = txt_psd.Text.Trim
+            DBUtil._connectionString = String.Format("Data Source={0}; uid={1}; Password={2}", txtServer, txtUser, txtPsd)
+            _connectionString = DBUtil._connectionString
+            Dim dt = getAllDatabase()
 
-        cmb_listDatabaseName.DataSource = dt
-        cmb_listDatabaseName.DisplayMember = "name"
-        cmb_listDatabaseName.ValueMember = "name"
+            cmb_listDatabaseName.DataSource = dt
+            cmb_listDatabaseName.DisplayMember = "name"
+            cmb_listDatabaseName.ValueMember = "name"
+            cmb_listDatabaseName.SelectedIndex = 0
 
-        cmb_listDatabaseName.SelectedIndex = 0
+            RecordDatabaseInfo(New DatabaseInfo With {.Source = txtServer, .Name = txtUser, .Password = txtPsd})
+
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+        End Try
     End Sub
 
     Private Sub cmb_listDatabaseName_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmb_listDatabaseName.SelectedIndexChanged
@@ -371,6 +451,8 @@ Public Class Form1
     End Sub
 
 #End Region
+
+
 
 End Class
 

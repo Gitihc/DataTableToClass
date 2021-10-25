@@ -43,7 +43,7 @@ If column.IsPrimaryKey then#>
 		<#
         Dim suffixStr = ""
         If column.CommonType = GetType(Decimal) OrElse column.CommonType = GetType(Double) Then
-            suffixStr += ".HasPrecision(18, " + column.Scale + ")"
+            suffixStr += ".HasPrecision(18, " + column.Scale.toString() + ")"
         End If
 
 		If column.DefaultValue =  "Now" Then
@@ -52,6 +52,10 @@ If column.IsPrimaryKey then#>
 
 		If column.ColumnType.ToString() =  "timestamp" Then
 			suffixStr += ".IsRowVersion()"
+		End If
+
+		If column.ColumnType.ToString() =  "varchar" AndAlso column.CharLength >0 Then
+			suffixStr += ".HasMaxLength("& column.CharLength &")"
 		End If
 		#>
 		Me.Property(Function(t) t.<#=column.ColumnName#>)<#=suffixStr#>

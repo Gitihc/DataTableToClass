@@ -3,6 +3,10 @@ Public Class <#= flowHandlerName#>
     Implements IFlowHandler
 
 #Region "FlowStep相关"
+	Public Function SetFirstFlowStep(dType As ApprovalTypeEnum, projectId As Integer, listId As Integer, userId As String) As Boolean Implements IFlowHandler.SetFirstFlowStep
+        Return FlowHandlerCommon.SetFirstFlowStep(Of <#= modelName#>)(dType, projectId, listId, userId, Me)
+    End Function
+
     Public Function GetOriginator(lid As Integer) As String Implements IFlowHandler.GetOriginator
         Return FlowHandlerCommon.GetOriginator(Of <#= modelName#>)(lid)
     End Function
@@ -46,6 +50,17 @@ Public Class <#= flowHandlerName#>
     Public Function GetFirstFlowStep(lid As Integer) As ApprovalBase Implements IFlowHandler.GetFirstFlowStep
         Return FlowHandlerCommon.GetFirstFlowStep(Of <#= modelName#>)(lid)
     End Function
+
+	''' <summary>
+    ''' 获取审批最后一步
+    ''' </summary>
+    ''' <param name="lid"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function GetLastFlowStep(lid As Integer) As ApprovalBase Implements IFlowHandler.GetLastFlowStep
+        Return FlowHandlerCommon.GetLastFlowStep(Of <#= modelName#>)(lid)
+    End Function
+
     ''' <summary>
     ''' 是否需要设置下一步审批人
     ''' </summary>
@@ -93,8 +108,7 @@ Public Class <#= flowHandlerName#>
     ''' <returns></returns>
     ''' <remarks></remarks>
     Public Function GetNextStepByID(lid As Integer, stepId As Integer) As ApprovalBase Implements IFlowHandler.GetNextStepByID
-        Dim listEntity = FlowHandlerCommon.GetFlowlist(Of <#= modelName#>)(lid)
-        Return (From p In listEntity Where p.ID > stepId).FirstOrDefault
+		Return FlowHandlerCommon.GetNextFlowStep(Of <#= modelName#>)(lid, stepId)
     End Function
     ''' <summary>
     ''' 更新方法
@@ -119,7 +133,7 @@ Public Class <#= flowHandlerName#>
     ''' </summary>
     ''' <param name="projectId"></param>
     ''' <param name="stepId"></param>
-    ''' <param name="approver"></param>
+    ''' <param name="userIds"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
     Public Function SetFlowStepUser(projectId As Integer, stepId As Integer, userIds As String) As Boolean Implements IFlowHandler.SetFlowStepUser
@@ -136,6 +150,17 @@ Public Class <#= flowHandlerName#>
     Public Function IsLastStepFlowStep(lid As Integer, stepId As Integer) As Boolean Implements IFlowHandler.IsLastStepFlowStep
         Return FlowHandlerCommon.IsLastStepFlowStep(Of <#= modelName#>)(lid, stepId)
     End Function
+
+	''' <summary>
+    ''' 判断是否存在审批流程
+    ''' </summary>
+    ''' <param name="lid"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function IsExistFlow(lid As Integer) As Boolean Implements IFlowHandler.IsExistFlow
+        Return FlowHandlerCommon.IsExistFlow(Of <#= modelName#>)(lid)
+    End Function
+
     ''' <summary>
     ''' 提交审批
     ''' </summary>

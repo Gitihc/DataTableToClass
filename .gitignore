@@ -1,0 +1,9 @@
+#过滤文件
+*.pdb
+*.ini
+/DataTableToClass/packages.config
+
+#过滤目录
+/DataTableToClass/bin/
+/DataTableToClass/obj/
+/packages/
