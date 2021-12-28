@@ -452,8 +452,76 @@ Public Class Form1
 
 #End Region
 
+#Region "RowData2ExcelRowTemplate"
+    Private Sub btnRowData2ExcelRow_Click(sender As System.Object, e As System.EventArgs) Handles btnRowData2ExcelRow.Click
+        Me.Width = 1662
+
+        Call SetBtnRowData2ExcelRow(False) '禁用按钮
+        Dim selectRows = dgv_listTableName.SelectedRows
+        Dim listTableName As New List(Of String)
+        For Each r As DataGridViewRow In dgv_listTableName.Rows
+            If Convert.ToBoolean(r.Cells(0).Value) Then
+                listTableName.Add(r.Cells(1).Value)
+            End If
+        Next
+        If listTableName.Count > 0 Then
+            Threading.ThreadPool.QueueUserWorkItem(Sub()
+                                                       Call T4RowData2ExcelRow(listTableName)
+                                                       Call SetBtnRowData2ExcelRow(True)    '设置build 按钮可用
+                                                   End Sub)
+        Else
+            Call SetBtnRowData2ExcelRow(True)    '设置build 按钮可用
+        End If
+    End Sub
+
+    Sub SetBtnRowData2ExcelRow(ByVal flag As Boolean)
+        Try
+            Dim enabled = False
+            Dim strTxt = "RowData2ExcelRow"
+            If flag Then
+                enabled = True
+                strTxt = "RowData2ExcelRow"
+            Else
+                enabled = False
+                strTxt = "努力生成中..."
+            End If
+
+            If Me.InvokeRequired Then
+                Me.Invoke(Sub()
+                              btnRowData2ExcelRow.Enabled = enabled
+                              btnRowData2ExcelRow.Text = strTxt
+                          End Sub)
+            Else
+                btnRowData2ExcelRow.Enabled = enabled
+                btnRowData2ExcelRow.Text = strTxt
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Sub T4RowData2ExcelRow(ByVal listTableName As List(Of String))
+        Dim jsDictionary As New Dictionary(Of String, String)
+        For Each tbName In listTableName
+            Dim listDbColumns = DbHelper.GetDbColumns(_connectionString, databaseName, tbName)
+
+            Dim jsTp = New RowData2ExcelRowTemplate(listDbColumns)
+            Dim jsContent = jsTp.TransformText()
+            jsDictionary.Add(tbName, jsContent)
+        Next
+        Dim sb As New StringBuilder
+        With sb
+            For Each itm In jsDictionary
+                .Append(itm.Key).AppendLine()
+                .Append(itm.Value).AppendLine().AppendLine()
+            Next
+        End With
+        SetRTB_JSText(sb.ToString)
+    End Sub
+#End Region
 
 
+    
 End Class
 
 

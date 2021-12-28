@@ -298,9 +298,9 @@ Partial Public Class VBHLSPMSFlowHandlerTemplate
         #End ExternalSource
         Me.Write(")(userId, lid)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    End Sub"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"#End Region"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"#Region ""企业微信相关"""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    Public Sub WebC"& _ 
                 "hatBuildMSG(applType As Integer, projectId As Integer, lid As Integer, stepId As"& _ 
-                " Integer, stepName As String, isFinishedOrReject As Integer, ByRef title As Stri"& _ 
-                "ng, ByRef description As String, Optional prefixStr As String = """") Implements I"& _ 
-                "FlowHandler.WebChatBuildMSG"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        Call ")
+                " Integer, stepName As String, isFinishedOrReject As FlowMsgType, ByRef title As "& _ 
+                "String, ByRef description As String, Optional prefixStr As String = """") Implemen"& _ 
+                "ts IFlowHandler.WebChatBuildMSG"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        Call ")
         
         #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBHLSPMSFlowHandlerTemplate.tt",301)
         Me.Write(Me.ToStringHelper.ToStringWithCulture(lidServiceName))
