@@ -10,36 +10,52 @@
 '</auto-generated>
 '------------------------------------------------------------------------------
 <System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "10.0.0.0")>  _
-Partial Public Class EasyUI_JSTableColumns
-    Inherits EasyUI_JSTableColumnsBase
+Partial Public Class RowData2ExcelRowTemplate
+    Inherits RowData2ExcelRowTemplateBase
     Public Overridable Function TransformText() As String
-        Me.Write("//formatMoney"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"//formatDate"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"columns: [["&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9)&"{ field: 'chk', checkbox: true }"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9)&",{ "& _ 
-                "field: 'idx', title: '序号', width: 30, align: ""center"", halign: ""center"", fixed: "& _ 
-                "true, formatter: function (v, r, i) { return i + 1 } }"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10))
+        Me.Write("Private Shared Sub SingleBranchSetRowValueFourth(rowSource As DataFilter,"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"      "& _ 
+                "                                               dataRow As IRow,"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"               "& _ 
+                "                                      dataRowIndex As Integer,"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                "& _ 
+                "                                     alignmentLeft As ICellStyle,"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             "& _ 
+                "                                        alignmentCenter As ICellStyle,"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        "& _ 
+                "                                             alignmentRight As ICellStyle)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9)&"Dim"& _ 
+                " colIndex As Integer = 0"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9)&"With rowSource"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9))
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\EasyUI_JSTableColumns.tt",7)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\RowData2ExcelRowTemplate.tt",10)
  For Each column in listColumns 
         
         #End ExternalSource
-        Me.Write(""&Global.Microsoft.VisualBasic.ChrW(9)&",{ field: '")
+        Me.Write(""&Global.Microsoft.VisualBasic.ChrW(9)&Global.Microsoft.VisualBasic.ChrW(9)&"Dim ")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\EasyUI_JSTableColumns.tt",8)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\RowData2ExcelRowTemplate.tt",11)
         Me.Write(Me.ToStringHelper.ToStringWithCulture(column.ColumnName))
         
         #End ExternalSource
-        Me.Write("', title: '")
+        Me.Write("Col = dataRow.CreateCell(colIndex)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9)&Global.Microsoft.VisualBasic.ChrW(9))
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\EasyUI_JSTableColumns.tt",8)
-        Me.Write(Me.ToStringHelper.ToStringWithCulture(column.Remark))
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\RowData2ExcelRowTemplate.tt",12)
+        Me.Write(Me.ToStringHelper.ToStringWithCulture(column.ColumnName))
         
         #End ExternalSource
-        Me.Write("', width: 150, align: ""left"", halign: ""center"", fixed: true, hidden: false }"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10))
+        Me.Write("Col.SetCellValue(.")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\EasyUI_JSTableColumns.tt",9)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\RowData2ExcelRowTemplate.tt",12)
+        Me.Write(Me.ToStringHelper.ToStringWithCulture(column.ColumnName))
+        
+        #End ExternalSource
+        Me.Write(")"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9)&Global.Microsoft.VisualBasic.ChrW(9))
+        
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\RowData2ExcelRowTemplate.tt",13)
+        Me.Write(Me.ToStringHelper.ToStringWithCulture(column.ColumnName))
+        
+        #End ExternalSource
+        Me.Write("Col.CellStyle = alignmentLeft"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9)&Global.Microsoft.VisualBasic.ChrW(9)&"colIndex += 1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9))
+        
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\RowData2ExcelRowTemplate.tt",15)
  Next 
         
         #End ExternalSource
-        Me.Write("]]")
+        Me.Write(""&Global.Microsoft.VisualBasic.ChrW(9)&"End With"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"End Sub")
         Return Me.GenerationEnvironment.ToString
     End Function
 End Class
@@ -48,7 +64,7 @@ End Class
 '''Base class for this transformation
 '''</summary>
 <System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "10.0.0.0")>  _
-Public Class EasyUI_JSTableColumnsBase
+Public Class RowData2ExcelRowTemplateBase
     #Region "Fields"
     Private generationEnvironmentField As Global.System.Text.StringBuilder
     Private errorsField As Global.System.CodeDom.Compiler.CompilerErrorCollection

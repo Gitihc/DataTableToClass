@@ -297,7 +297,7 @@ Public Class <#= flowHandlerName#>
 #End Region
 
 #Region "企业微信相关"
-    Public Sub WebChatBuildMSG(applType As Integer, projectId As Integer, lid As Integer, stepId As Integer, stepName As String, isFinishedOrReject As Integer, ByRef title As String, ByRef description As String, Optional prefixStr As String = "") Implements IFlowHandler.WebChatBuildMSG
+    Public Sub WebChatBuildMSG(applType As Integer, projectId As Integer, lid As Integer, stepId As Integer, stepName As String, isFinishedOrReject As FlowMsgType, ByRef title As String, ByRef description As String, Optional prefixStr As String = "") Implements IFlowHandler.WebChatBuildMSG
         Call <#= lidServiceName#>.WebChatBuildMSG(applType, projectId, lid, stepId, stepName, isFinishedOrReject, title, description, prefixStr)
     End Sub
 

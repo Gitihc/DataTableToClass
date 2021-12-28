@@ -1,0 +1,17 @@
+﻿<#@ template language="VB" #>
+Private Shared Sub SingleBranchSetRowValueFourth(rowSource As DataFilter,
+                                                     dataRow As IRow,
+                                                     dataRowIndex As Integer,
+                                                     alignmentLeft As ICellStyle,
+                                                     alignmentCenter As ICellStyle,
+                                                     alignmentRight As ICellStyle)
+	Dim colIndex As Integer = 0
+	With rowSource
+	<# For Each column in listColumns #>
+		Dim <#=column.ColumnName#>Col = dataRow.CreateCell(colIndex)
+		<#=column.ColumnName#>Col.SetCellValue(.<#=column.ColumnName#>)
+		<#=column.ColumnName#>Col.CellStyle = alignmentLeft
+		colIndex += 1
+	<# Next #>
+	End With
+End Sub

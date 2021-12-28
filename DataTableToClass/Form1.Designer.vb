@@ -42,6 +42,7 @@ Partial Class Form1
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.cmb_TemplateList = New System.Windows.Forms.ComboBox()
         Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
+        Me.btnRowData2ExcelRow = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.gb_ListTable.SuspendLayout()
@@ -91,6 +92,7 @@ Partial Class Form1
         '
         'TabPage1
         '
+        Me.TabPage1.Controls.Add(Me.btnRowData2ExcelRow)
         Me.TabPage1.Controls.Add(Me.listBox1)
         Me.TabPage1.Controls.Add(Me.rtb_JS)
         Me.TabPage1.Controls.Add(Me.btnEasyUI_JSTableColumn)
@@ -129,7 +131,7 @@ Partial Class Form1
         '
         'btnEasyUI_JSTableColumn
         '
-        Me.btnEasyUI_JSTableColumn.Location = New System.Drawing.Point(563, 177)
+        Me.btnEasyUI_JSTableColumn.Location = New System.Drawing.Point(559, 55)
         Me.btnEasyUI_JSTableColumn.Name = "btnEasyUI_JSTableColumn"
         Me.btnEasyUI_JSTableColumn.Size = New System.Drawing.Size(148, 24)
         Me.btnEasyUI_JSTableColumn.TabIndex = 12
@@ -148,7 +150,7 @@ Partial Class Form1
         '
         'btn_Build
         '
-        Me.btn_Build.Location = New System.Drawing.Point(460, 177)
+        Me.btn_Build.Location = New System.Drawing.Point(559, 92)
         Me.btn_Build.Name = "btn_Build"
         Me.btn_Build.Size = New System.Drawing.Size(97, 24)
         Me.btn_Build.TabIndex = 9
@@ -253,6 +255,15 @@ Partial Class Form1
         Me.RichTextBox1.TabIndex = 0
         Me.RichTextBox1.Text = ""
         '
+        'btnRowData2ExcelRow
+        '
+        Me.btnRowData2ExcelRow.Location = New System.Drawing.Point(559, 16)
+        Me.btnRowData2ExcelRow.Name = "btnRowData2ExcelRow"
+        Me.btnRowData2ExcelRow.Size = New System.Drawing.Size(148, 24)
+        Me.btnRowData2ExcelRow.TabIndex = 15
+        Me.btnRowData2ExcelRow.Text = "RowData2ExcelRow"
+        Me.btnRowData2ExcelRow.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
@@ -295,5 +306,6 @@ Partial Class Form1
     Friend WithEvents btnEasyUI_JSTableColumn As System.Windows.Forms.Button
     Friend WithEvents rtb_JS As System.Windows.Forms.RichTextBox
     Friend WithEvents listBox1 As System.Windows.Forms.ListBox
+    Friend WithEvents btnRowData2ExcelRow As System.Windows.Forms.Button
 
 End Class
