@@ -14,11 +14,8 @@ Public Class <#= modelName#>
 	''' <summary>
 	''' <#=column.Remark#>
 	''' </summary>
-	''' <value></value>
-	''' <returns></returns>
-	''' <remarks></remarks>
 	<Description("<#=column.Remark#>")>
-	Public Property <#=column.ColumnName#> As <#= column.CSharpType#><# if(column.CommonType.IsValueType andalso column.IsNullable)#>?<#End If#>
+	Public Property <#=column.ColumnName#> As <#= column.VBType#><# if(column.CommonType.IsValueType andalso column.IsNullable)#>?<#End If#>
 
 <# Next #>
 

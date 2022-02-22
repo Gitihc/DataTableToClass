@@ -74,6 +74,81 @@
         Return vbType
     End Function
 
+    Public Shared Function MapCSharpType(ByVal dbtype As String) As String
+        If String.IsNullOrEmpty(dbtype) Then Return dbtype
+        dbtype = dbtype.ToLower()
+        Dim vbType As String = "object"
+
+        Select Case dbtype
+            Case "bigint"
+                vbType = "Long"
+            Case "binary"
+                vbType = "Byte[]"
+            Case "bit"
+                vbType = "Bool"
+            Case "char"
+                vbType = "String"
+            Case "date"
+                vbType = "DateTime"
+            Case "datetime"
+                vbType = "DateTime"
+            Case "datetime2"
+                vbType = "DateTime"
+            Case "datetimeoffset"
+                vbType = "DateTimeOffset"
+            Case "decimal"
+                vbType = "Decimal"
+            Case "float"
+                vbType = "Double"
+            Case "image"
+                vbType = "Byte[]"
+            Case "int"
+                vbType = "int"
+            Case "money"
+                vbType = "Decimal"
+            Case "nchar"
+                vbType = "String"
+            Case "ntext"
+                vbType = "String"
+            Case "numeric"
+                vbType = "Decimal"
+            Case "nvarchar"
+                vbType = "String"
+            Case "real"
+                vbType = "Single"
+            Case "smalldatetime"
+                vbType = "DateTime"
+            Case "smallint"
+                vbType = "Short"
+            Case "smallmoney"
+                vbType = "Decimal"
+            Case "sql_variant"
+                vbType = "Object"
+            Case "sysname"
+                vbType = "Object"
+            Case "text"
+                vbType = "String"
+            Case "time"
+                vbType = "TimeSpan"
+            Case "timestamp"
+                vbType = "Byte[]"
+            Case "tinyint"
+                vbType = "Byte"
+            Case "uniqueidentifier"
+                vbType = "Guid"
+            Case "varbinary"
+                vbType = "Byte[]"
+            Case "varchar"
+                vbType = "String"
+            Case "xml"
+                vbType = "String"
+            Case Else
+                vbType = "Object"
+        End Select
+
+        Return vbType
+    End Function
+
     Public Shared Function MapCommonType(ByVal dbtype As String) As Type
         If String.IsNullOrEmpty(dbtype) Then Return Type.Missing.[GetType]()
         dbtype = dbtype.ToLower()

@@ -6,6 +6,7 @@ Public Class Form1
     Private databaseName As String
 
     Private basePath As String = AppDomain.CurrentDomain.BaseDirectory
+    Dim csharpModelFilePath As String = IO.Path.Combine(basePath, "CSharpModels")
     Dim modelFilePath As String = IO.Path.Combine(basePath, "Models")
     Dim serviceFilePath As String = IO.Path.Combine(basePath, "Services")
     Dim repositoryFilePath As String = IO.Path.Combine(basePath, "Repositories")
@@ -228,7 +229,7 @@ Public Class Form1
 
 #Region "获取数据库所有表"
     Function getAllDatatable(ByVal dbName As String) As DataTable
-        Dim sqlstr = String.Format("SELECT name as TableName FROM {0}..sysobjects Where xtype='U' ORDER BY name", dbName)
+        Dim sqlstr = String.Format("SELECT name as TableName FROM [{0}]..sysobjects Where xtype='U' ORDER BY name", dbName)
 
         Return DBUtil.ExecuteHasQuery(sqlstr)
     End Function
@@ -238,6 +239,7 @@ Public Class Form1
 #Region "T4 相关"
     Sub T4Build(ByVal listTableName As List(Of String))
         If Not String.IsNullOrEmpty(_connectionString) AndAlso Not String.IsNullOrEmpty(databaseName) AndAlso listTableName.Count > 0 Then
+            Dim csharpModelDictionary As New Dictionary(Of String, String)
             Dim modelDictionary As New Dictionary(Of String, String)
             Dim repositoryDictionary As New Dictionary(Of String, String)
             Dim serviceDictionary As New Dictionary(Of String, String)
@@ -250,6 +252,11 @@ Public Class Form1
                 Dim modelTp = New VBModelTemplate(tbName, listDbColumns, strModelExt, strMapExt)
                 Dim modelContent = modelTp.TransformText()
                 modelDictionary.Add(tbName, modelContent)
+
+                Dim csharpModelTp = New CSharpTemplate(tbName, listDbColumns, strModelExt, strMapExt)
+                Dim csharpModelContent = csharpModelTp.TransformText()
+                csharpModelDictionary.Add(tbName, csharpModelContent)
+
                 'repository
                 Dim repositoryTp = New VBRepositoryTemplate(tbName, strModelExt, strRepositoryExt)
                 Dim repostoryContent = repositoryTp.TransformText
@@ -278,6 +285,7 @@ Public Class Form1
             arrManual.Add(manual)
             Threading.ThreadPool.QueueUserWorkItem(New WaitCallback(
                                                    Sub()
+                                                       Call T4BuildCSharpModel(csharpModelDictionary, arrManual)  '生成类、fluentapi Map
                                                        Call T4BuildModel(modelDictionary, arrManual)  '生成类、fluentapi Map
                                                        Call T4BuildService(serviceDictionary, arrManual)  'service 
                                                        Call T4BuildRepository(repositoryDictionary, arrManual) 'repository
@@ -294,6 +302,13 @@ Public Class Form1
         End If
     End Sub
 #Region "生成model、Map、Service、Repository、FlowHandler"
+    Sub T4BuildCSharpModel(ByVal csharpModelDictionary As Dictionary(Of String, String), ByRef arrManual As List(Of ManualResetEvent))
+        For Each key In csharpModelDictionary.Keys
+            Dim filePath As String = IO.Path.Combine(csharpModelFilePath, String.Format("{0}.cs", key))
+            Dim content = csharpModelDictionary.Item(key)
+            Call BuildFile(filePath, content)
+        Next
+    End Sub
     Sub T4BuildModel(ByVal modelDictionary As Dictionary(Of String, String), ByRef arrManual As List(Of ManualResetEvent))
         For Each key In modelDictionary.Keys
             Dim filePath As String = IO.Path.Combine(modelFilePath, String.Format("{0}{1}.vb", key, strModelExt))

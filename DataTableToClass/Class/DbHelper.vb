@@ -39,8 +39,8 @@ Public Class DbHelper
                                    "    ic.column_id," +
                                    "    ic.index_column_id," +
                                    "    ic.object_id    " +
-                                   "    FROM {0}.sys.indexes idx" +
-                                   "    INNER JOIN {0}.sys.index_columns ic ON idx.index_id = ic.index_id AND idx.object_id = ic.object_id" +
+                                   "    FROM [{0}].sys.indexes idx" +
+                                   "    INNER JOIN [{0}].sys.index_columns ic ON idx.index_id = ic.index_id AND idx.object_id = ic.object_id" +
                                    "    WHERE  idx.object_id =OBJECT_ID(@tableName) AND idx.is_primary_key=1" +
                                    " )" +
                                    " select" +
@@ -63,10 +63,10 @@ Public Class DbHelper
                                     " cast(colm.scale as int) Scale," +
                                     " isnull(comments.text,'') DefaultValue," +
                                     " prop.value Remark" +
-                                    " from {0}.sys.columns colm" +
-                                    " inner join {0}.sys.types systype on colm.system_type_id=systype.system_type_id and colm.user_type_id=systype.user_type_id" +
-                                    " left join {0}.sys.extended_properties prop on colm.object_id=prop.major_id and colm.column_id=prop.minor_id" +
-                                    " left join {0}.sys.syscomments comments on colm.default_object_id=comments.id" +
+                                    " from [{0}].sys.columns colm" +
+                                    " inner join [{0}].sys.types systype on colm.system_type_id=systype.system_type_id and colm.user_type_id=systype.user_type_id" +
+                                    " left join [{0}].sys.extended_properties prop on colm.object_id=prop.major_id and colm.column_id=prop.minor_id" +
+                                    " left join [{0}].sys.syscomments comments on colm.default_object_id=comments.id" +
                                     " LEFT JOIN indexCTE ON colm.column_id=indexCTE.column_id AND colm.object_id=indexCTE.object_id " +
                                     " where colm.object_id=OBJECT_ID(@tableName)" +
                                     " order by colm.column_id", database)

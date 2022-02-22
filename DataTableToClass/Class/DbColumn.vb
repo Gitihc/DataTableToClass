@@ -39,6 +39,11 @@ Public NotInheritable Class DbColumn
     ''' <remarks></remarks>
     Public ReadOnly Property CSharpType As String
         Get
+            Return SqlServerDbTypeMap.MapCSharpType(ColumnType)
+        End Get
+    End Property
+    Public ReadOnly Property VBType As String
+        Get
             Return SqlServerDbTypeMap.MapVbType(ColumnType)
         End Get
     End Property

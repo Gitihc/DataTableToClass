@@ -1,0 +1,58 @@
+﻿<#@ template debug="false" hostspecific="false" language="VB" #>
+<#@ output extension=".txt" #>
+
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
+using System.ComponentModel;
+
+<# if(addNamespace)#>namespace <#=namespaceKey#>
+{
+<#End If#>
+	/// <summary>
+	/// 
+	/// </summary>
+	public class <#= modelName#>
+	{
+	<# For Each column in listColumns #>
+		/// <summary>
+		/// 
+		/// </summary>
+		[Description("名称")]
+		public <#= column.CSharpType#><# if(column.CommonType.IsValueType andalso column.IsNullable)#>?<#End If#> <#=column.ColumnName#> { get; set; }
+	<# Next #>
+	}
+
+	public class <#= mapName#> : IEntityTypeConfiguration<<#= tableName#>>
+    {
+        public void Configure(EntityTypeBuilder<<#= tableName#>> builder)
+        {
+			builder.ToTable("<#= tableName#>");
+<#For Each column in listColumns 
+	If column.IsPrimaryKey then#>
+			builder.HasKey(t => t.<#=column.ColumnName#>);
+	<#Else#>
+	<#
+		Dim suffixStr = ""
+		If column.CommonType = GetType(Decimal) OrElse column.CommonType = GetType(Double) Then
+			suffixStr += ".HasPrecision(18, " + column.Scale.toString() + ")"
+		End If
+
+		If column.DefaultValue =  "Now" Then
+			suffixStr += ".HasDatabaseGeneratedOption(DatabaseGeneratedOption.Computed)"
+		End If
+
+		If column.ColumnType.ToString() =  "timestamp" Then
+			suffixStr += ".IsRowVersion()"
+		End If
+
+		If column.ColumnType.ToString() =  "varchar" AndAlso column.CharLength >0 Then
+			suffixStr += ".HasMaxLength("& column.CharLength &")"
+		End If
+	#>
+		builder.Property(t => t.<#=column.ColumnName#>)<#=suffixStr#>;
+	<#End If 
+Next#>
+        }
+    }
+<# if(addNamespace)#>}<#End If#>

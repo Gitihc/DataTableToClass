@@ -10,141 +10,120 @@
 '</auto-generated>
 '------------------------------------------------------------------------------
 <System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "10.0.0.0")>  _
-Partial Public Class VBModelTemplate
-    Inherits VBModelTemplateBase
+Partial Public Class CSharpTemplate
+    Inherits CSharpTemplateBase
     Public Overridable Function TransformText() As String
-        Me.Write(""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Imports System.Data.Entity.ModelConfiguration"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Imports System.ComponentModel"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"''' <summary>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"''' "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"''' </summary>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"''' <remarks></remarks>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Public Class ")
+        Me.Write(""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"using Microsoft.EntityFrameworkCore;"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"using Microsoft.EntityFrameworkCore.Metad"& _ 
+                "ata.Builders;"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"using System;"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"using System.ComponentModel;"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10))
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBModelTemplate.tt",10)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\CSharpTemplate.tt",9)
+ if(addNamespace)
+        
+        #End ExternalSource
+        Me.Write("namespace ")
+        
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\CSharpTemplate.tt",9)
+        Me.Write(Me.ToStringHelper.ToStringWithCulture(namespaceKey))
+        
+        #End ExternalSource
+        Me.Write(""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"{"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10))
+        
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\CSharpTemplate.tt",11)
+End If
+        
+        #End ExternalSource
+        Me.Write(""&Global.Microsoft.VisualBasic.ChrW(9)&"/// <summary>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9)&"/// "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9)&"/// </summary>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9)&"public class ")
+        
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\CSharpTemplate.tt",15)
         Me.Write(Me.ToStringHelper.ToStringWithCulture(modelName))
         
         #End ExternalSource
-        Me.Write(""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10))
+        Me.Write(""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9)&"{"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9))
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBModelTemplate.tt",12)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\CSharpTemplate.tt",17)
  For Each column in listColumns 
         
         #End ExternalSource
-        Me.Write(""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9)&"''' <summary>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9)&"''' ")
+        Me.Write(""&Global.Microsoft.VisualBasic.ChrW(9)&Global.Microsoft.VisualBasic.ChrW(9)&"/// <summary>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9)&Global.Microsoft.VisualBasic.ChrW(9)&"/// "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9)&Global.Microsoft.VisualBasic.ChrW(9)&"/// </summary>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9)&Global.Microsoft.VisualBasic.ChrW(9)&"[Description(""名称"")]"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9)&Global.Microsoft.VisualBasic.ChrW(9)&"public ")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBModelTemplate.tt",15)
-        Me.Write(Me.ToStringHelper.ToStringWithCulture(column.Remark))
-        
-        #End ExternalSource
-        Me.Write(""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9)&"''' </summary>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9)&"<Description(""")
-        
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBModelTemplate.tt",17)
-        Me.Write(Me.ToStringHelper.ToStringWithCulture(column.Remark))
-        
-        #End ExternalSource
-        Me.Write(""")>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9)&"Public Property ")
-        
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBModelTemplate.tt",18)
-        Me.Write(Me.ToStringHelper.ToStringWithCulture(column.ColumnName))
-        
-        #End ExternalSource
-        Me.Write(" As ")
-        
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBModelTemplate.tt",18)
-        Me.Write(Me.ToStringHelper.ToStringWithCulture(column.VBType))
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\CSharpTemplate.tt",22)
+        Me.Write(Me.ToStringHelper.ToStringWithCulture(column.CSharpType))
         
         #End ExternalSource
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBModelTemplate.tt",18)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\CSharpTemplate.tt",22)
  if(column.CommonType.IsValueType andalso column.IsNullable)
         
         #End ExternalSource
         Me.Write("?")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBModelTemplate.tt",18)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\CSharpTemplate.tt",22)
 End If
         
         #End ExternalSource
-        Me.Write(""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10))
+        Me.Write(" ")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBModelTemplate.tt",20)
- Next 
-        
-        #End ExternalSource
-        Me.Write(""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9)&"Public Sub New()"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10))
-        
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBModelTemplate.tt",23)
- For Each column in listColumns 
-        
-        #End ExternalSource
-        
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBModelTemplate.tt",24)
- if(column.DefaultValue.length > 0) 
-        
-        #End ExternalSource
-        Me.Write(""&Global.Microsoft.VisualBasic.ChrW(9)&Global.Microsoft.VisualBasic.ChrW(9)&"Me.")
-        
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBModelTemplate.tt",25)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\CSharpTemplate.tt",22)
         Me.Write(Me.ToStringHelper.ToStringWithCulture(column.ColumnName))
         
         #End ExternalSource
-        Me.Write(" = ")
+        Me.Write(" { get; set; }"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9))
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBModelTemplate.tt",25)
-        Me.Write(Me.ToStringHelper.ToStringWithCulture(column.DefaultValue))
-        
-        #End ExternalSource
-        Me.Write(""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10))
-        
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBModelTemplate.tt",26)
-End If
-        
-        #End ExternalSource
-        
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBModelTemplate.tt",27)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\CSharpTemplate.tt",23)
  Next 
         
         #End ExternalSource
-        Me.Write(""&Global.Microsoft.VisualBasic.ChrW(9)&"End Sub"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"End Class"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Partial Public Class ")
+        Me.Write(""&Global.Microsoft.VisualBasic.ChrW(9)&"}"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9)&"public class ")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBModelTemplate.tt",32)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\CSharpTemplate.tt",26)
         Me.Write(Me.ToStringHelper.ToStringWithCulture(mapName))
         
         #End ExternalSource
-        Me.Write(""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    Inherits EntityTypeConfiguration(Of ")
+        Me.Write(" : IEntityTypeConfiguration<")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBModelTemplate.tt",33)
-        Me.Write(Me.ToStringHelper.ToStringWithCulture(modelName))
-        
-        #End ExternalSource
-        Me.Write(")"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9)&"Public Sub New()"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9)&Global.Microsoft.VisualBasic.ChrW(9)&"Me.ToTable(""")
-        
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBModelTemplate.tt",35)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\CSharpTemplate.tt",26)
         Me.Write(Me.ToStringHelper.ToStringWithCulture(tableName))
         
         #End ExternalSource
-        Me.Write(""")"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10))
+        Me.Write(">"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    {"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        public void Configure(EntityTypeBuilder<")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBModelTemplate.tt",36)
-For Each column in listColumns 
-If column.IsPrimaryKey then
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\CSharpTemplate.tt",28)
+        Me.Write(Me.ToStringHelper.ToStringWithCulture(tableName))
         
         #End ExternalSource
-        Me.Write(""&Global.Microsoft.VisualBasic.ChrW(9)&Global.Microsoft.VisualBasic.ChrW(9)&"Me.HasKey(Function(s) s.")
+        Me.Write("> builder)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        {"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9)&Global.Microsoft.VisualBasic.ChrW(9)&Global.Microsoft.VisualBasic.ChrW(9)&"builder.ToTable(""")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBModelTemplate.tt",38)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\CSharpTemplate.tt",30)
+        Me.Write(Me.ToStringHelper.ToStringWithCulture(tableName))
+        
+        #End ExternalSource
+        Me.Write(""");"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10))
+        
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\CSharpTemplate.tt",31)
+For Each column in listColumns 
+	If column.IsPrimaryKey then
+        
+        #End ExternalSource
+        Me.Write(""&Global.Microsoft.VisualBasic.ChrW(9)&Global.Microsoft.VisualBasic.ChrW(9)&Global.Microsoft.VisualBasic.ChrW(9)&"builder.HasKey(t => t.")
+        
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\CSharpTemplate.tt",33)
         Me.Write(Me.ToStringHelper.ToStringWithCulture(column.ColumnName))
         
         #End ExternalSource
-        Me.Write(")"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10))
+        Me.Write(");"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9))
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBModelTemplate.tt",39)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\CSharpTemplate.tt",34)
 Else
         
         #End ExternalSource
-        Me.Write(""&Global.Microsoft.VisualBasic.ChrW(9)&Global.Microsoft.VisualBasic.ChrW(9))
+        Me.Write(""&Global.Microsoft.VisualBasic.ChrW(9))
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBModelTemplate.tt",40)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\CSharpTemplate.tt",35)
 
-        Dim suffixStr = ""
-        If column.CommonType = GetType(Decimal) OrElse column.CommonType = GetType(Double) Then
-            suffixStr += ".HasPrecision(18, " + column.Scale.toString() + ")"
-        End If
+		Dim suffixStr = ""
+		If column.CommonType = GetType(Decimal) OrElse column.CommonType = GetType(Double) Then
+			suffixStr += ".HasPrecision(18, " + column.Scale.toString() + ")"
+		End If
 
 		If column.DefaultValue =  "Now" Then
 			suffixStr += ".HasDatabaseGeneratedOption(DatabaseGeneratedOption.Computed)"
@@ -157,29 +136,40 @@ Else
 		If column.ColumnType.ToString() =  "varchar" AndAlso column.CharLength >0 Then
 			suffixStr += ".HasMaxLength("& column.CharLength &")"
 		End If
-		
+	
         
         #End ExternalSource
-        Me.Write(""&Global.Microsoft.VisualBasic.ChrW(9)&Global.Microsoft.VisualBasic.ChrW(9)&"Me.Property(Function(t) t.")
+        Me.Write(""&Global.Microsoft.VisualBasic.ChrW(9)&Global.Microsoft.VisualBasic.ChrW(9)&"builder.Property(t => t.")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBModelTemplate.tt",58)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\CSharpTemplate.tt",53)
         Me.Write(Me.ToStringHelper.ToStringWithCulture(column.ColumnName))
         
         #End ExternalSource
         Me.Write(")")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBModelTemplate.tt",58)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\CSharpTemplate.tt",53)
         Me.Write(Me.ToStringHelper.ToStringWithCulture(suffixStr))
         
         #End ExternalSource
-        Me.Write(""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10))
+        Me.Write(";"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9))
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\VBModelTemplate.tt",59)
-End If
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\CSharpTemplate.tt",54)
+End If 
 Next
         
         #End ExternalSource
-        Me.Write(""&Global.Microsoft.VisualBasic.ChrW(9)&"End Sub"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"End Class"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10))
+        Me.Write("        }"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    }"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10))
+        
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\CSharpTemplate.tt",58)
+ if(addNamespace)
+        
+        #End ExternalSource
+        Me.Write("}")
+        
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\CSharpTemplate.tt",58)
+End If
+        
+        #End ExternalSource
         Return Me.GenerationEnvironment.ToString
     End Function
 End Class
@@ -188,7 +178,7 @@ End Class
 '''Base class for this transformation
 '''</summary>
 <System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "10.0.0.0")>  _
-Public Class VBModelTemplateBase
+Public Class CSharpTemplateBase
     #Region "Fields"
     Private generationEnvironmentField As Global.System.Text.StringBuilder
     Private errorsField As Global.System.CodeDom.Compiler.CompilerErrorCollection
