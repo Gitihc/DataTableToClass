@@ -12,7 +12,7 @@ using System.ComponentModel;
 	/// <summary>
 	/// 
 	/// </summary>
-	public class <#= modelName#>
+	public class <#= tableName#>
 	{
 	<# For Each column in listColumns #>
 		/// <summary>
