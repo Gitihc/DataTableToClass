@@ -16,7 +16,7 @@ using System.ComponentModel;
 	{
 	<# For Each column in listColumns #>
 		/// <summary>
-		/// 
+		/// <#=column.Remark#>
 		/// </summary>
 		[Description("<#=column.Remark#>")]
 		public <#= column.CSharpType#><# if(column.CommonType.IsValueType andalso column.IsNullable)#>?<#End If#> <#=column.ColumnName#> { get; set; }
@@ -34,12 +34,19 @@ using System.ComponentModel;
 	<#Else#>
 	<#
 		Dim suffixStr = ""
+
+		If column.ColumnType.ToString() =  "varchar" then
+			suffixStr +=".HasColumnType("""+ column.ColumnType +""")"
+		End If
+		
 		If column.CommonType = GetType(Decimal) OrElse column.CommonType = GetType(Double) Then
 			suffixStr += ".HasPrecision(18, " + column.Scale.toString() + ")"
 		End If
 
-		If column.DefaultValue =  "Now" Then
-			suffixStr += ".HasDatabaseGeneratedOption(DatabaseGeneratedOption.Computed)"
+		If column.DefaultValue = "getdate()" OrElse column.DefaultValue = "Now" Then
+			suffixStr += ".HasDefaultValueSql("+ column.DefaultValue +")"
+		ElseIf Not String.IsNullOrWhiteSpace(column.DefaultValue) Then
+			suffixStr +=".HasDefaultValue("+ column.DefaultValue +")"
 		End If
 
 		If column.ColumnType.ToString() =  "timestamp" Then
