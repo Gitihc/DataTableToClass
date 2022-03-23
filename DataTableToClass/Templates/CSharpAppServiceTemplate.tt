@@ -1,0 +1,20 @@
+﻿<#@ template debug="false" hostspecific="false" language="VB" #>
+<#@ output extension=".txt" #>
+
+using SPMS.Application.Interface;
+using SPMS.Repository;
+using SPMS.Repository.Domain;
+using SPMS.Repository.Interface;
+
+namespace SPMS.Application
+{
+    public class <#= serviceName#> : BaseAppService<<#= tableName#>, SPMSDBContext>
+    {
+        public <#= serviceName#>(
+                IRepository<<#= tableName#>, SPMSDBContext> repository
+            ) : base(repository)
+        {
+
+        }
+    }
+}

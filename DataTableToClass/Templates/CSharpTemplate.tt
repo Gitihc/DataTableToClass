@@ -36,7 +36,11 @@ using System.ComponentModel;
 		Dim suffixStr = ""
 
 		If column.ColumnType.ToString() =  "varchar" then
-			suffixStr +=".HasColumnType("""+ column.ColumnType +""")"
+			If column.CharLength =-1 then
+				suffixStr +=".HasColumnType("""+ column.ColumnType +"(MAX)"")"
+			Else 
+				suffixStr +=".HasColumnType("""+ column.ColumnType +""")"
+			End If 
 		End If
 		
 		If column.CommonType = GetType(Decimal) OrElse column.CommonType = GetType(Double) Then
@@ -44,7 +48,7 @@ using System.ComponentModel;
 		End If
 
 		If column.DefaultValue = "getdate()" OrElse column.DefaultValue = "Now" Then
-			suffixStr += ".HasDefaultValueSql("+ column.DefaultValue +")"
+			suffixStr += ".HasDefaultValueSql("""+ column.DefaultValue +""")"
 		ElseIf Not String.IsNullOrWhiteSpace(column.DefaultValue) Then
 			suffixStr +=".HasDefaultValue("+ column.DefaultValue +")"
 		End If
@@ -55,6 +59,10 @@ using System.ComponentModel;
 
 		If column.ColumnType.ToString() =  "varchar" AndAlso column.CharLength >0 Then
 			suffixStr += ".HasMaxLength("& column.CharLength &")"
+		End If
+
+		If Not String.IsNullOrWhiteSpace(column.Remark) Then
+			suffixStr += ".HasComment("""+column.Remark +""")"
 		End If
 	#>
 		builder.Property(t => t.<#=column.ColumnName#>)<#=suffixStr#>;

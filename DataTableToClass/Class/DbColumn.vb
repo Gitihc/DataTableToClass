@@ -104,9 +104,19 @@ Public NotInheritable Class DbColumn
         Set(value As String)
             Select Case value.ToLower
                 Case "getdate"
-                    _defaultValue = "Now"
+                    _defaultValue = "getdate()"
                 Case "''"
                     _defaultValue = "String.Empty"
+                Case "0"
+                    Select Case CSharpType.ToLower
+                        Case "int"
+                            _defaultValue = value
+                        Case "decimal"
+                            _defaultValue = "Decimal.Zero"
+                        Case Else
+                            _defaultValue = value
+                            Return
+                    End Select
                 Case Else
                     _defaultValue = value
             End Select

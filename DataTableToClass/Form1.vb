@@ -7,6 +7,7 @@ Public Class Form1
 
     Private basePath As String = AppDomain.CurrentDomain.BaseDirectory
     Dim csharpModelFilePath As String = IO.Path.Combine(basePath, "CSharpModels")
+    Dim csharpAppServiceFilePath As String = IO.Path.Combine(basePath, "CSharpAppSerice")
     Dim modelFilePath As String = IO.Path.Combine(basePath, "Models")
     Dim serviceFilePath As String = IO.Path.Combine(basePath, "Services")
     Dim repositoryFilePath As String = IO.Path.Combine(basePath, "Repositories")
@@ -16,6 +17,7 @@ Public Class Form1
     Private strModelExt As String = "Model"
     Private strMapExt As String = "Map"
     Private strServiceExt As String = "Service"
+    Private strCSharpServiceExt As String = "AppService"
     Private strRepositoryExt As String = "Repository" '"Service"
     Private strFlowHandlerExt As String = "FlowHandler"
 
@@ -239,7 +241,10 @@ Public Class Form1
 #Region "T4 相关"
     Sub T4Build(ByVal listTableName As List(Of String))
         If Not String.IsNullOrEmpty(_connectionString) AndAlso Not String.IsNullOrEmpty(databaseName) AndAlso listTableName.Count > 0 Then
+
+            Dim csharpAppServiceDictionary As New Dictionary(Of String, String)
             Dim csharpModelDictionary As New Dictionary(Of String, String)
+
             Dim modelDictionary As New Dictionary(Of String, String)
             Dim repositoryDictionary As New Dictionary(Of String, String)
             Dim serviceDictionary As New Dictionary(Of String, String)
@@ -267,6 +272,10 @@ Public Class Form1
                 Dim serviceContent = serviceTp.TransformText()
                 serviceDictionary.Add(tbName, serviceContent)
 
+                Dim csharpServiceTp = New CSharpAppServiceTemplate(tbName)
+                Dim csharpServiceContent = csharpServiceTp.TransformText()
+                csharpAppServiceDictionary.Add(tbName, csharpServiceContent)
+
                 If tbName.EndsWith("Approval") OrElse tbName.EndsWith("Approvals") Then
                     'flowHandler
                     Dim flowHandlerTp = New VBFlowHandlerTemplate(tbName, strModelExt, strServiceExt)
@@ -285,6 +294,7 @@ Public Class Form1
             arrManual.Add(manual)
             Threading.ThreadPool.QueueUserWorkItem(New WaitCallback(
                                                    Sub()
+                                                       Call T4BuildCSharpAppService(csharpAppServiceDictionary, arrManual)
                                                        Call T4BuildCSharpModel(csharpModelDictionary, arrManual)  '生成类、fluentapi Map
                                                        Call T4BuildModel(modelDictionary, arrManual)  '生成类、fluentapi Map
                                                        Call T4BuildService(serviceDictionary, arrManual)  'service 
@@ -302,6 +312,14 @@ Public Class Form1
         End If
     End Sub
 #Region "生成model、Map、Service、Repository、FlowHandler"
+    Sub T4BuildCSharpAppService(ByVal csharpAppServiceDictionary As Dictionary(Of String, String), ByRef arrManual As List(Of ManualResetEvent))
+        For Each key In csharpAppServiceDictionary.Keys
+            Dim filePath As String = IO.Path.Combine(csharpAppServiceFilePath, String.Format("{0}{1}.cs", key, strCSharpServiceExt))
+            Dim content = csharpAppServiceDictionary.Item(key)
+            Call BuildFile(filePath, content)
+        Next
+    End Sub
+
     Sub T4BuildCSharpModel(ByVal csharpModelDictionary As Dictionary(Of String, String), ByRef arrManual As List(Of ManualResetEvent))
         For Each key In csharpModelDictionary.Keys
             Dim filePath As String = IO.Path.Combine(csharpModelFilePath, String.Format("{0}.cs", key))
@@ -536,7 +554,7 @@ Public Class Form1
 #End Region
 
 
-    
+
 End Class
 
 
