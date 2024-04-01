@@ -1,0 +1,13 @@
+﻿<#@ template debug="false" hostspecific="false" language="VB" #>
+<#@ output extension=".txt" #>
+
+package <#= MapperPackage#>;
+
+import <#= MyBaseMapper#>;
+import <#= EntityPackage#>.<#= EntityName#>;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface <#= EntityName#>Mapper extends MyBaseMapper<<#= EntityName#>>{
+
+}

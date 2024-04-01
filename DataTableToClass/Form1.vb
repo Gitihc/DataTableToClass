@@ -6,6 +6,7 @@ Public Class Form1
     Private databaseName As String
 
     Private basePath As String = AppDomain.CurrentDomain.BaseDirectory
+    Private javaBasePath As String = IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Java")
     Dim csharpModelFilePath As String = IO.Path.Combine(basePath, "CSharpModels")
     Dim csharpAppServiceFilePath As String = IO.Path.Combine(basePath, "CSharpAppSerice")
     Dim modelFilePath As String = IO.Path.Combine(basePath, "Models")
@@ -32,6 +33,9 @@ Public Class Form1
         End Try
     End Sub
 
+    Private Sub ShowFolder(basePath As String)
+        System.Diagnostics.Process.Start(basePath)
+    End Sub
 #Region "listBox"
     Public Class DatabaseInfo
         Public Property Source As String
@@ -101,13 +105,30 @@ Public Class Form1
 #End Region
 
 #Region "按钮事件"
+    Private Sub cmb_dbtype_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cmb_dbtype.SelectedIndexChanged
+        Dim dbType = cmb_dbtype.SelectedItem
+        If dbType = DbTypeCommon.MySql Then
+            txt_name.Text = "root"
+            txt_psd.Text = "sa123456"
+        End If
+    End Sub
+
     Private Sub btn_connect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_connect.Click
         Try
             Dim txtServer = txt_server.Text.Trim
             Dim txtUser = txt_name.Text.Trim
             Dim txtPsd = txt_psd.Text.Trim
-            DBUtil._connectionString = String.Format("Data Source={0}; uid={1}; Password={2}", txtServer, txtUser, txtPsd)
-            _connectionString = DBUtil._connectionString
+            Dim dbType = cmb_dbtype.SelectedItem
+            DBUtil.dbType = dbType
+            'DBUtil._connectionString = String.Format("Data Source={0}; uid={1}; Password={2}", txtServer, txtUser, txtPsd)
+
+
+            DBUtil.host = txtServer
+            DBUtil.userId = txtUser
+            DBUtil.password = txtPsd
+
+
+            _connectionString = DBUtil.connectionString()
             Dim dt = getAllDatabase()
 
             cmb_listDatabaseName.DataSource = dt
@@ -157,6 +178,9 @@ Public Class Form1
         End If
     End Sub
 
+    Private Sub btn_flist_Click(sender As System.Object, e As System.EventArgs) Handles btn_flist.Click
+
+    End Sub
 
 #End Region
 
@@ -211,7 +235,9 @@ Public Class Form1
                 IO.Directory.CreateDirectory(dir)
             End If
 
-            IO.File.WriteAllText(path, content)
+            Dim utf8 = New System.Text.UTF8Encoding()
+
+            IO.File.WriteAllText(path, content, utf8)
 
         Catch ex As Exception
             Throw New Exception("生成文件出错！" + vbNewLine + ex.ToString)
@@ -225,6 +251,10 @@ Public Class Form1
     Function getAllDatabase() As DataTable
         Dim sqlstr = "SELECT name FROM  master..sysdatabases WHERE name NOT IN ( 'master', 'model', 'msdb', 'tempdb', 'northwind','pubs' )"
 
+        If DBUtil.dbType = DbTypeCommon.MySql Then
+            sqlstr = "SELECT SCHEMA_NAME name FROM information_schema.SCHEMATA;"
+        End If
+
         Return DBUtil.ExecuteHasQuery(sqlstr)
     End Function
 #End Region
@@ -232,7 +262,9 @@ Public Class Form1
 #Region "获取数据库所有表"
     Function getAllDatatable(ByVal dbName As String) As DataTable
         Dim sqlstr = String.Format("SELECT name as TableName FROM [{0}]..sysobjects Where xtype='U' ORDER BY name", dbName)
-
+        If DBUtil.dbType = DbTypeCommon.MySql Then
+            sqlstr = MySqlUtils.getAllTable(dbName)
+        End If
         Return DBUtil.ExecuteHasQuery(sqlstr)
     End Function
 #End Region
@@ -276,7 +308,7 @@ Public Class Form1
                 Dim csharpServiceContent = csharpServiceTp.TransformText()
                 csharpAppServiceDictionary.Add(tbName, csharpServiceContent)
 
-                If tbName.EndsWith("Approval") OrElse tbName.EndsWith("Approvals") Then
+                If tbName.EndsWith("Approval") OrElse tbName.EndsWith("Approvals") OrElse tbName.EndsWith("Flow") Then
                     'flowHandler
                     Dim flowHandlerTp = New VBFlowHandlerTemplate(tbName, strModelExt, strServiceExt)
                     Dim flowHandlerContent = flowHandlerTp.TransformText()
@@ -308,7 +340,8 @@ Public Class Form1
 
             Call SetBtnBuildStatus(True)    '设置build 按钮可用
 
-            System.Diagnostics.Process.Start(basePath)
+            'System.Diagnostics.Process.Start(basePath)
+            ShowFolder(basePath)
         End If
     End Sub
 #Region "生成model、Map、Service、Repository、FlowHandler"
@@ -552,6 +585,118 @@ Public Class Form1
         SetRTB_JSText(sb.ToString)
     End Sub
 #End Region
+
+
+#Region "Java"
+    Private Sub btn_java_create_Click(sender As System.Object, e As System.EventArgs) Handles btn_java_create.Click
+        Dim entityNames = txt_entityname.Text.Trim()
+        Dim myBaseMapper = txt_mybasemapper.Text.Trim()
+        Dim myBaseController = txt_mybasecontroller.Text.Trim()
+        Dim myBaseServiceImpl = txt_mybaseserviceimpl.Text.Trim()
+
+        Dim entityPackage = txt_entitypackage.Text.Trim()
+        Dim mapperPackage = txt_mapperpackage.Text.Trim()
+        Dim servicePackage = txt_servicepackage.Text.Trim()
+        Dim serviceimplPackage = txt_serviceimplpackage.Text.Trim()
+        Dim controllerPackage = txt_contollerpackage.Text.Trim()
+
+        Try
+            For Each entityName In entityNames.Split(",")
+                entityName = entityName.Trim()
+                If String.IsNullOrEmpty(entityName) Then
+                    Continue For
+                End If
+                Dim baseInfo = New BaseInfo(entityName, myBaseMapper, myBaseServiceImpl, myBaseController, entityPackage, mapperPackage, servicePackage, serviceimplPackage, controllerPackage)
+                T4BuildJavaMapper(baseInfo)
+                T4BuildJavaService(baseInfo)
+                T4BuildJavaServiceImpl(baseInfo)
+                T4BuildJavaController(baseInfo)
+            Next
+            ShowFolder(javaBasePath)
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
+    End Sub
+
+    Sub T4BuildJavaMapper(baseInfo As BaseInfo)
+        Dim mapperTP = New JMapperTemplate(baseInfo)
+        Dim content = mapperTP.TransformText()
+        Dim filePath = IO.Path.Combine(javaBasePath, "Mapper\" + baseInfo.EntityName + "Mapper.java")
+        Call BuildFile(filePath, content)
+    End Sub
+
+    Sub T4BuildJavaService(baseInfo As BaseInfo)
+        Dim mapperTP = New JServiceTemplate(baseInfo)
+        Dim content = mapperTP.TransformText()
+        Dim filePath = IO.Path.Combine(javaBasePath, "Service\" + baseInfo.EntityName + "Service.java")
+        Call BuildFile(filePath, content)
+    End Sub
+
+    Sub T4BuildJavaServiceImpl(baseInfo As BaseInfo)
+        Dim mapperTP = New JServiceImplTemplate(baseInfo)
+        Dim content = mapperTP.TransformText()
+        Dim filePath = IO.Path.Combine(javaBasePath, "ServiceImpl\" + baseInfo.EntityName + "ServiceImpl.java")
+        Call BuildFile(filePath, content)
+    End Sub
+
+    Sub T4BuildJavaController(baseInfo As BaseInfo)
+        Dim mapperTP = New JControllerTemplate(baseInfo)
+        Dim content = mapperTP.TransformText()
+        Dim filePath = IO.Path.Combine(javaBasePath, "Controller\" + baseInfo.EntityName + "Controller.java")
+        Call BuildFile(filePath, content)
+    End Sub
+#End Region
+
+    Private defaultPackageName As String = "com.cost168.wzcs"
+    Private defaultModuleName As String = "project"
+    Private commonTextboxs As List(Of TextBox) = New List(Of TextBox)
+    Private fileTextboxs As List(Of TextBox) = New List(Of TextBox)
+
+    Private Sub txt_packagename_Enter(sender As System.Object, e As System.EventArgs) Handles txt_packagename.Enter
+        defaultPackageName = txt_packagename.Text
+    End Sub
+
+    Private Sub ReplaceValue(textboxs As List(Of TextBox), oldValue As String, newValue As String)
+        For Each item As TextBox In textboxs
+            item.Text = item.Text.Replace(oldValue, newValue)
+        Next
+    End Sub
+    Private Sub InitTextBoxArray()
+        commonTextboxs.AddRange({txt_mybasemapper, txt_mybaseserviceimpl, txt_mybasecontroller})
+        fileTextboxs.AddRange({txt_entitypackage, txt_mapperpackage, txt_servicepackage, txt_serviceimplpackage, txt_contollerpackage})
+    End Sub
+
+
+    Private Sub txt_modulename_Enter(sender As System.Object, e As System.EventArgs) Handles txt_modulename.Enter
+        defaultModuleName = txt_modulename.Text
+    End Sub
+
+    Private Sub txt_packagename_KeyUp(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txt_packagename.KeyUp
+        If e.KeyCode = Keys.Enter Then
+            Dim newPackageName = txt_packagename.Text.Trim()
+            If commonTextboxs.Count = 0 Then
+                InitTextBoxArray()
+            End If
+            If Not defaultPackageName.Equals(newPackageName) Then
+                ReplaceValue(commonTextboxs, defaultPackageName, newPackageName)
+                ReplaceValue(fileTextboxs, defaultPackageName, newPackageName)
+                defaultPackageName = newPackageName
+            End If
+        End If
+    End Sub
+
+    Private Sub txt_modulename_KeyUp(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txt_modulename.KeyUp
+        If e.KeyCode = Keys.Enter Then
+            Dim newModuleName = txt_modulename.Text.Trim()
+            If commonTextboxs.Count = 0 Then
+                InitTextBoxArray()
+            End If
+            If Not defaultModuleName.Equals(newModuleName) Then
+                ReplaceValue(fileTextboxs, defaultModuleName, newModuleName)
+                defaultModuleName = newModuleName
+            End If
+        End If
+    End Sub
 
 
 

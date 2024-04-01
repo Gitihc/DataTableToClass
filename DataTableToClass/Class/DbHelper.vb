@@ -73,20 +73,43 @@ Public Class DbHelper
         Dim param As SqlParameter = New SqlParameter("@tableName", SqlDbType.NVarChar, 100) With {
             .Value = String.Format("{0}.{1}.{2}", database, schema, tableName)
         }
-        Dim dt As DataTable = GetDataTable(connectionString, sql, param)
-        Return dt.Rows.Cast(Of DataRow)().[Select](Function(row) New DbColumn() With {
-            .ColumnID = row.Field(Of Integer)("ColumnID"),
-            .IsPrimaryKey = row.Field(Of Boolean)("IsPrimaryKey"),
-            .ColumnName = row.Field(Of String)("ColumnName"),
-            .ColumnType = row.Field(Of String)("ColumnType"),
-            .IsIdentity = row.Field(Of Boolean)("IsIdentity"),
-            .IsNullable = row.Field(Of Boolean)("IsNullable"),
-            .ByteLength = row.Field(Of Integer)("ByteLength"),
-            .CharLength = row.Field(Of Integer)("CharLength"),
-            .Scale = row.Field(Of Integer)("Scale"),
-            .DefaultValue = row.Field(Of String)("DefaultValue").Replace("(", "").Replace(")", ""),
-            .Remark = row("Remark").ToString()
-        }).ToList()
+        Dim dt As DataTable = Nothing
+        If DBUtil.dbType = DbTypeCommon.MySql Then
+            dt = DBUtil.ExecuteHasQuery(MySqlUtils.getFieldInfo(tableName))
+        ElseIf DBUtil.dbType = DbTypeCommon.SqlServer Then
+            dt = GetDataTable(connectionString, sql, param)
+        End If
+        'Dim dt As DataTable = GetDataTable(connectionString, sql, param)
+        If DBUtil.dbType = DbTypeCommon.MySql Then
+            Return dt.Rows.Cast(Of DataRow)().[Select](Function(row) New DbColumn() With {
+              .ColumnID = row.Field(Of Long)("ColumnID"),
+              .IsPrimaryKey = row.Field(Of Long)("IsPrimaryKey"),
+              .ColumnName = row.Field(Of String)("ColumnName"),
+              .ColumnType = row.Field(Of String)("ColumnType"),
+              .IsIdentity = row.Field(Of Long)("IsIdentity"),
+              .IsNullable = row.Field(Of Long)("IsNullable"),
+              .ByteLength = row.Field(Of Long)("ByteLength"),
+              .CharLength = row.Field(Of Long)("CharLength"),
+              .Scale = row.Field(Of Long)("Scale"),
+              .DefaultValue = row.Field(Of String)("DefaultValue").Replace("(", "").Replace(")", ""),
+              .Remark = row("Remark").ToString()
+          }).ToList()
+        ElseIf DBUtil.dbType = DbTypeCommon.SqlServer Then
+            Return dt.Rows.Cast(Of DataRow)().[Select](Function(row) New DbColumn() With {
+               .ColumnID = row.Field(Of Integer)("ColumnID"),
+               .IsPrimaryKey = row.Field(Of Boolean)("IsPrimaryKey"),
+               .ColumnName = row.Field(Of String)("ColumnName"),
+               .ColumnType = row.Field(Of String)("ColumnType"),
+               .IsIdentity = row.Field(Of Boolean)("IsIdentity"),
+               .IsNullable = row.Field(Of Boolean)("IsNullable"),
+               .ByteLength = row.Field(Of Integer)("ByteLength"),
+               .CharLength = row.Field(Of Integer)("CharLength"),
+               .Scale = row.Field(Of Integer)("Scale"),
+               .DefaultValue = row.Field(Of String)("DefaultValue").Replace("(", "").Replace(")", ""),
+               .Remark = row("Remark").ToString()
+           }).ToList()
+        End If
+        Return New List(Of DbColumn)()
     End Function
 
     Public Shared Function GetDataTable(ByVal connectionString As String, ByVal commandText As String, ByVal ParamArray parms As SqlParameter()) As DataTable

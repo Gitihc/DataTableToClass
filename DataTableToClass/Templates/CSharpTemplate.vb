@@ -139,7 +139,9 @@ Else
 				suffixStr +=".HasColumnType("""+ column.ColumnType +"(MAX)"")"
 			Else 
 				suffixStr +=".HasColumnType("""+ column.ColumnType +""")"
-			End If 
+			End If
+		ElseIf column.ColumnType.ToString() =  "datetime" Then
+			suffixStr +=".HasColumnType("""+ column.ColumnType +""")"
 		End If
 		
 		If column.CommonType = GetType(Decimal) OrElse column.CommonType = GetType(Double) Then
@@ -148,6 +150,8 @@ Else
 
 		If column.DefaultValue = "getdate()" OrElse column.DefaultValue = "Now" Then
 			suffixStr += ".HasDefaultValueSql("""+ column.DefaultValue +""")"
+		ElseIf  Not String.IsNullOrWhiteSpace(column.DefaultValue) andalso column.CSharpType = "bool" Then
+			suffixStr +=".HasDefaultValue("+ if(column.DefaultValue=0,"false","true") +")"
 		ElseIf Not String.IsNullOrWhiteSpace(column.DefaultValue) Then
 			suffixStr +=".HasDefaultValue("+ column.DefaultValue +")"
 		End If
@@ -168,32 +172,32 @@ Else
         #End ExternalSource
         Me.Write(""&Global.Microsoft.VisualBasic.ChrW(9)&Global.Microsoft.VisualBasic.ChrW(9)&"builder.Property(t => t.")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\CSharpTemplate.tt",68)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\CSharpTemplate.tt",72)
         Me.Write(Me.ToStringHelper.ToStringWithCulture(column.ColumnName))
         
         #End ExternalSource
         Me.Write(")")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\CSharpTemplate.tt",68)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\CSharpTemplate.tt",72)
         Me.Write(Me.ToStringHelper.ToStringWithCulture(suffixStr))
         
         #End ExternalSource
         Me.Write(";"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9))
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\CSharpTemplate.tt",69)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\CSharpTemplate.tt",73)
 End If 
 Next
         
         #End ExternalSource
         Me.Write("        }"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    }"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10))
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\CSharpTemplate.tt",73)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\CSharpTemplate.tt",77)
  if(addNamespace)
         
         #End ExternalSource
         Me.Write("}")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\CSharpTemplate.tt",73)
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\CSharpTemplate.tt",77)
 End If
         
         #End ExternalSource

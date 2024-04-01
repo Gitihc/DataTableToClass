@@ -10,51 +10,83 @@
 '</auto-generated>
 '------------------------------------------------------------------------------
 <System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "10.0.0.0")>  _
-Partial Public Class CSharpAppServiceTemplate
-    Inherits CSharpAppServiceTemplateBase
+Partial Public Class JServiceImplTemplate
+    Inherits JServiceImplTemplateBase
     Public Overridable Function TransformText() As String
-        Me.Write(""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"using System.Collections.Generic;"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"using System.Linq;"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"using System.Threading.T"& _ 
-                "asks;"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"using APMS.Domain;"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"//using APMS.Domain.Models;"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"//using APMS.Domain.Inte"& _ 
-                "rface;"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"//using APMS.Application.Interface;"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"using TLFPMS.Repository;"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"using TLF"& _ 
-                "PMS.Repository.Domain;"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"using TLFPMS.Repository.Interface;"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"namespace APMS.App"& _ 
-                "lication"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"{"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(9)&"//public class ")
+        Me.Write(""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"package ")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\CSharpAppServiceTemplate.tt",17)
-        Me.Write(Me.ToStringHelper.ToStringWithCulture(serviceName))
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\Java\JServiceImplTemplate.tt",4)
+        Me.Write(Me.ToStringHelper.ToStringWithCulture(ServiceImplPackage))
         
         #End ExternalSource
-        Me.Write(" : BaseAppService<")
+        Me.Write(";"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"import ")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\CSharpAppServiceTemplate.tt",17)
-        Me.Write(Me.ToStringHelper.ToStringWithCulture(tableName))
-        
-        #End ExternalSource
-        Me.Write(", APMSDBContext>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    public class ")
-        
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\CSharpAppServiceTemplate.tt",18)
-        Me.Write(Me.ToStringHelper.ToStringWithCulture(serviceName))
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\Java\JServiceImplTemplate.tt",6)
+        Me.Write(Me.ToStringHelper.ToStringWithCulture(MyBaseServiceImpl))
         
         #End ExternalSource
-        Me.Write(" : BaseAppService<")
+        Me.Write(";"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"import ")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\CSharpAppServiceTemplate.tt",18)
-        Me.Write(Me.ToStringHelper.ToStringWithCulture(tableName))
-        
-        #End ExternalSource
-        Me.Write(", TLFPMSDBContext>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    {"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        public ")
-        
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\CSharpAppServiceTemplate.tt",20)
-        Me.Write(Me.ToStringHelper.ToStringWithCulture(serviceName))
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\Java\JServiceImplTemplate.tt",7)
+        Me.Write(Me.ToStringHelper.ToStringWithCulture(EntityPackage))
         
         #End ExternalSource
-        Me.Write("("&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                IRepository<")
+        Me.Write(".")
         
-        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\CSharpAppServiceTemplate.tt",21)
-        Me.Write(Me.ToStringHelper.ToStringWithCulture(tableName))
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\Java\JServiceImplTemplate.tt",7)
+        Me.Write(Me.ToStringHelper.ToStringWithCulture(EntityName))
         
         #End ExternalSource
-        Me.Write(", TLFPMSDBContext> repository"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"            ) : base(repository)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        {"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"   "& _ 
-                "     }"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    }"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"}")
+        Me.Write(";"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"import ")
+        
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\Java\JServiceImplTemplate.tt",8)
+        Me.Write(Me.ToStringHelper.ToStringWithCulture(MapperPackage))
+        
+        #End ExternalSource
+        Me.Write(".")
+        
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\Java\JServiceImplTemplate.tt",8)
+        Me.Write(Me.ToStringHelper.ToStringWithCulture(EntityName))
+        
+        #End ExternalSource
+        Me.Write("Mapper;"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"import ")
+        
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\Java\JServiceImplTemplate.tt",9)
+        Me.Write(Me.ToStringHelper.ToStringWithCulture(ServicePackage))
+        
+        #End ExternalSource
+        Me.Write(".")
+        
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\Java\JServiceImplTemplate.tt",9)
+        Me.Write(Me.ToStringHelper.ToStringWithCulture(EntityName))
+        
+        #End ExternalSource
+        Me.Write("Service;"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"import org.springframework.stereotype.Service;"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"@Service"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"public clas"& _ 
+                "s ")
+        
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\Java\JServiceImplTemplate.tt",13)
+        Me.Write(Me.ToStringHelper.ToStringWithCulture(EntityName))
+        
+        #End ExternalSource
+        Me.Write("ServiceImpl extends MyBaseServiceImpl<")
+        
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\Java\JServiceImplTemplate.tt",13)
+        Me.Write(Me.ToStringHelper.ToStringWithCulture(EntityName))
+        
+        #End ExternalSource
+        Me.Write("Mapper, ")
+        
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\Java\JServiceImplTemplate.tt",13)
+        Me.Write(Me.ToStringHelper.ToStringWithCulture(EntityName))
+        
+        #End ExternalSource
+        Me.Write("> implements ")
+        
+        #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\Java\JServiceImplTemplate.tt",13)
+        Me.Write(Me.ToStringHelper.ToStringWithCulture(EntityName))
+        
+        #End ExternalSource
+        Me.Write("Service {"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"}")
         Return Me.GenerationEnvironment.ToString
     End Function
 End Class
@@ -63,7 +95,7 @@ End Class
 '''Base class for this transformation
 '''</summary>
 <System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "10.0.0.0")>  _
-Public Class CSharpAppServiceTemplateBase
+Public Class JServiceImplTemplateBase
     #Region "Fields"
     Private generationEnvironmentField As Global.System.Text.StringBuilder
     Private errorsField As Global.System.CodeDom.Compiler.CompilerErrorCollection

@@ -9,7 +9,9 @@
     Private mapName As String
 
     Private addNamespace As Boolean = True
-    Private namespaceKey As String = "SPMS.Repository.Domain"
+    'Private namespaceKey As String = "SPMS.Repository.Domain"
+    'Private namespaceKey As String = "APMS.Domain.Models"
+    Private namespaceKey As String = "TLFPMS.Repository.Domain"
 
     Public Sub New(ByVal _tableName As String,
                    ByVal _listColumns As List(Of DbColumn),

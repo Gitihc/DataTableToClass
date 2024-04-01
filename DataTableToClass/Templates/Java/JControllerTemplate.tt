@@ -1,0 +1,16 @@
+﻿<#@ template debug="false" hostspecific="false" language="VB" #>
+<#@ output extension=".txt" #>
+
+package <#= ControllerPackage#>;
+
+import <#= MyBaseController#>;
+import <#= EntityPackage#>.<#= EntityName#>;
+import <#= ServicePackage#>.<#= EntityName#>Service;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Controller;
+
+@Slf4j
+@Controller
+public class <#= EntityName#>Controller extends MyBaseController<<#= EntityName#>, <#= EntityName#>Service> {
+
+}

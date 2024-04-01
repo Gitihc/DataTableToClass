@@ -40,7 +40,9 @@ using System.ComponentModel;
 				suffixStr +=".HasColumnType("""+ column.ColumnType +"(MAX)"")"
 			Else 
 				suffixStr +=".HasColumnType("""+ column.ColumnType +""")"
-			End If 
+			End If
+		ElseIf column.ColumnType.ToString() =  "datetime" Then
+			suffixStr +=".HasColumnType("""+ column.ColumnType +""")"
 		End If
 		
 		If column.CommonType = GetType(Decimal) OrElse column.CommonType = GetType(Double) Then
@@ -49,6 +51,8 @@ using System.ComponentModel;
 
 		If column.DefaultValue = "getdate()" OrElse column.DefaultValue = "Now" Then
 			suffixStr += ".HasDefaultValueSql("""+ column.DefaultValue +""")"
+		ElseIf  Not String.IsNullOrWhiteSpace(column.DefaultValue) andalso column.CSharpType = "bool" Then
+			suffixStr +=".HasDefaultValue("+ if(column.DefaultValue=0,"false","true") +")"
 		ElseIf Not String.IsNullOrWhiteSpace(column.DefaultValue) Then
 			suffixStr +=".HasDefaultValue("+ column.DefaultValue +")"
 		End If

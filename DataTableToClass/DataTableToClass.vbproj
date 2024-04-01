@@ -84,6 +84,11 @@
     <Compile Include="Class\DbColumn.vb" />
     <Compile Include="Class\DbHelper.vb" />
     <Compile Include="Class\DbTable.vb" />
+    <Compile Include="Class\Java\BaseInfo.vb" />
+    <Compile Include="Class\Java\TemplateClass\JControllerTemplate.vb" />
+    <Compile Include="Class\Java\TemplateClass\JMapperTemplate.vb" />
+    <Compile Include="Class\Java\TemplateClass\JServiceImplTemplate.vb" />
+    <Compile Include="Class\Java\TemplateClass\JServiceTemplate.vb" />
     <Compile Include="Class\SqlServerDbTypeMap.vb" />
     <Compile Include="Class\TemplateClass\CSharpAppServiceTemplate.vb" />
     <Compile Include="Class\TemplateClass\CSharpTemplate.vb" />
@@ -95,6 +100,7 @@
     <Compile Include="Class\TemplateClass\VBRepositoryTemplate.vb" />
     <Compile Include="Class\TemplateClass\VBServiceTemplate.vb" />
     <Compile Include="common\DBUtil.vb" />
+    <Compile Include="common\MySqlUtils.vb" />
     <Compile Include="common\Util.vb" />
     <Compile Include="Form1.vb">
       <SubType>Form</SubType>
@@ -132,6 +138,26 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EasyUI_JSTableColumns.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Java\JControllerTemplate.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>JControllerTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Java\JMapperTemplate.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>JMapperTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Java\JServiceImplTemplate.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>JServiceImplTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Java\JServiceTemplate.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>JServiceTemplate.tt</DependentUpon>
     </Compile>
     <Compile Include="Templates\RowData2ExcelRowTemplate.vb">
       <AutoGen>True</AutoGen>
@@ -213,6 +239,22 @@
     <Content Include="Templates\EasyUI_JSTableColumns.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>EasyUI_JSTableColumns.vb</LastGenOutput>
+    </Content>
+    <Content Include="Templates\Java\JControllerTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>JControllerTemplate.vb</LastGenOutput>
+    </Content>
+    <Content Include="Templates\Java\JMapperTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>JMapperTemplate.vb</LastGenOutput>
+    </Content>
+    <Content Include="Templates\Java\JServiceImplTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>JServiceImplTemplate.vb</LastGenOutput>
+    </Content>
+    <Content Include="Templates\Java\JServiceTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>JServiceTemplate.vb</LastGenOutput>
     </Content>
     <Content Include="Templates\RowData2ExcelRowTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>

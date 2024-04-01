@@ -1,17 +1,24 @@
 ﻿<#@ template debug="false" hostspecific="false" language="VB" #>
 <#@ output extension=".txt" #>
 
-using SPMS.Application.Interface;
-using SPMS.Repository;
-using SPMS.Repository.Domain;
-using SPMS.Repository.Interface;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using APMS.Domain;
+//using APMS.Domain.Models;
+//using APMS.Domain.Interface;
+//using APMS.Application.Interface;
+using TLFPMS.Repository;
+using TLFPMS.Repository.Domain;
+using TLFPMS.Repository.Interface;
 
-namespace SPMS.Application
+namespace APMS.Application
 {
-    public class <#= serviceName#> : BaseAppService<<#= tableName#>, SPMSDBContext>
+	//public class <#= serviceName#> : BaseAppService<<#= tableName#>, APMSDBContext>
+    public class <#= serviceName#> : BaseAppService<<#= tableName#>, TLFPMSDBContext>
     {
         public <#= serviceName#>(
-                IRepository<<#= tableName#>, SPMSDBContext> repository
+                IRepository<<#= tableName#>, TLFPMSDBContext> repository
             ) : base(repository)
         {
 
