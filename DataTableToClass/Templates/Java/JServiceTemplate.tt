@@ -2,7 +2,7 @@
 <#@ output extension=".txt" #>
 package <#= ServicePackage#>;
 
-import com.cost168.wzcs.common.base.MyBaseService;
+import <#= MyBaseServiceImpl#>;
 import <#= EntityPackage#>.<#= EntityName#>;
 
 public interface <#= EntityName#>Service extends MyBaseService<<#= EntityName#>> {
