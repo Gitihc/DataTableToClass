@@ -2,7 +2,7 @@
 <#@ output extension=".txt" #>
 package <#= ServicePackage#>;
 
-import <#= MyBaseServiceImpl#>;
+import <#= MyBaseService#>;
 import <#= EntityPackage#>.<#= EntityName#>;
 
 public interface <#= EntityName#>Service extends MyBaseService<<#= EntityName#>> {

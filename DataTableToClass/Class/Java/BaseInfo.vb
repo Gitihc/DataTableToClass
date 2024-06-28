@@ -1,5 +1,6 @@
 ﻿Public Class BaseInfo
     Public Property MyBaseMapper As String = ""
+    Public Property MyBaseService As String = ""
     Public Property MyBaseServiceImpl As String = ""
     Public Property MyBaseController As String = ""
 
@@ -13,6 +14,7 @@
 
     Sub New(entityName As String,
         myBaseMapper As String,
+        myBaseService As String,
         myBaseServiceImpl As String,
         myBaseController As String,
         entityPackage As String,
@@ -23,6 +25,7 @@
 
         Me.EntityName = entityName
         Me.MyBaseController = myBaseController
+        Me.MyBaseService = MyBaseService
         Me.MyBaseServiceImpl = myBaseServiceImpl
 
         Me.MyBaseMapper = myBaseMapper

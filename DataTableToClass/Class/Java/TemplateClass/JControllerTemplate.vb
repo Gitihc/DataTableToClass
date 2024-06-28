@@ -1,5 +1,6 @@
 ﻿Public Class JControllerTemplate
     Public Property MyBaseMapper As String = ""
+    Public Property MyBaseService As String = ""
     Public Property MyBaseServiceImpl As String = ""
     Public Property MyBaseController As String = ""
 
@@ -19,6 +20,7 @@
         Me.EntityName = baseInfo.EntityName
         Me.MyBaseMapper = baseInfo.MyBaseMapper
         Me.MyBaseController = baseInfo.MyBaseController
+        Me.MyBaseService = baseInfo.MyBaseService
         Me.MyBaseServiceImpl = baseInfo.MyBaseServiceImpl
 
         Me.EntityPackage = baseInfo.EntityPackage

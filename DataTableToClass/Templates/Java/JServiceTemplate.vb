@@ -22,7 +22,7 @@ Partial Public Class JServiceTemplate
         Me.Write(";"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"import ")
         
         #ExternalSource("E:\Visual Studio 2010\Projects\DataTableToClass\DataTableToClass\Templates\Java\JServiceTemplate.tt",5)
-        Me.Write(Me.ToStringHelper.ToStringWithCulture(MyBaseServiceImpl))
+        Me.Write(Me.ToStringHelper.ToStringWithCulture(MyBaseService))
         
         #End ExternalSource
         Me.Write(";"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"import ")

@@ -592,6 +592,7 @@ Public Class Form1
         Dim entityNames = txt_entityname.Text.Trim()
         Dim myBaseMapper = txt_mybasemapper.Text.Trim()
         Dim myBaseController = txt_mybasecontroller.Text.Trim()
+        Dim myBaseService = txt_mybaseservice.Text.Trim()
         Dim myBaseServiceImpl = txt_mybaseserviceimpl.Text.Trim()
 
         Dim entityPackage = txt_entitypackage.Text.Trim()
@@ -606,7 +607,7 @@ Public Class Form1
                 If String.IsNullOrEmpty(entityName) Then
                     Continue For
                 End If
-                Dim baseInfo = New BaseInfo(entityName, myBaseMapper, myBaseServiceImpl, myBaseController, entityPackage, mapperPackage, servicePackage, serviceimplPackage, controllerPackage)
+                Dim baseInfo = New BaseInfo(entityName, myBaseMapper, myBaseService, myBaseServiceImpl, myBaseController, entityPackage, mapperPackage, servicePackage, serviceimplPackage, controllerPackage)
                 T4BuildJavaMapper(baseInfo)
                 T4BuildJavaService(baseInfo)
                 T4BuildJavaServiceImpl(baseInfo)
@@ -662,7 +663,7 @@ Public Class Form1
         Next
     End Sub
     Private Sub InitTextBoxArray()
-        commonTextboxs.AddRange({txt_mybasemapper, txt_mybaseserviceimpl, txt_mybasecontroller})
+        commonTextboxs.AddRange({txt_mybasemapper, txt_mybaseservice, txt_mybaseserviceimpl, txt_mybasecontroller})
         fileTextboxs.AddRange({txt_entitypackage, txt_mapperpackage, txt_servicepackage, txt_serviceimplpackage, txt_contollerpackage})
     End Sub
 

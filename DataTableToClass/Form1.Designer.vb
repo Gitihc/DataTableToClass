@@ -47,6 +47,8 @@ Partial Class Form1
         Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.txt_mybaseservice = New System.Windows.Forms.TextBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.txt_modulename = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
@@ -330,6 +332,8 @@ Partial Class Form1
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Label12)
+        Me.GroupBox1.Controls.Add(Me.txt_mybaseservice)
         Me.GroupBox1.Controls.Add(Me.Label11)
         Me.GroupBox1.Controls.Add(Me.txt_modulename)
         Me.GroupBox1.Controls.Add(Me.Label10)
@@ -355,10 +359,27 @@ Partial Class Form1
         Me.GroupBox1.Controls.Add(Me.txt_mybasemapper)
         Me.GroupBox1.Location = New System.Drawing.Point(8, 6)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(726, 384)
+        Me.GroupBox1.Size = New System.Drawing.Size(726, 414)
         Me.GroupBox1.TabIndex = 4
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "GroupBox1"
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(25, 130)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(83, 12)
+        Me.Label12.TabIndex = 25
+        Me.Label12.Text = "MyBaseService"
+        '
+        'txt_mybaseservice
+        '
+        Me.txt_mybaseservice.Location = New System.Drawing.Point(161, 127)
+        Me.txt_mybaseservice.Name = "txt_mybaseservice"
+        Me.txt_mybaseservice.Size = New System.Drawing.Size(329, 21)
+        Me.txt_mybaseservice.TabIndex = 24
+        Me.txt_mybaseservice.Text = "com.cost168.wzcs.common.base.MyBaseService"
         '
         'Label11
         '
@@ -397,7 +418,7 @@ Partial Class Form1
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(25, 170)
+        Me.Label9.Location = New System.Drawing.Point(25, 194)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(101, 12)
         Me.Label9.TabIndex = 19
@@ -405,7 +426,7 @@ Partial Class Form1
         '
         'txt_mybasecontroller
         '
-        Me.txt_mybasecontroller.Location = New System.Drawing.Point(161, 167)
+        Me.txt_mybasecontroller.Location = New System.Drawing.Point(161, 191)
         Me.txt_mybasecontroller.Name = "txt_mybasecontroller"
         Me.txt_mybasecontroller.Size = New System.Drawing.Size(329, 21)
         Me.txt_mybasecontroller.TabIndex = 18
@@ -414,7 +435,7 @@ Partial Class Form1
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(25, 135)
+        Me.Label8.Location = New System.Drawing.Point(25, 162)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(107, 12)
         Me.Label8.TabIndex = 17
@@ -422,7 +443,7 @@ Partial Class Form1
         '
         'txt_mybaseserviceimpl
         '
-        Me.txt_mybaseserviceimpl.Location = New System.Drawing.Point(161, 132)
+        Me.txt_mybaseserviceimpl.Location = New System.Drawing.Point(161, 159)
         Me.txt_mybaseserviceimpl.Name = "txt_mybaseserviceimpl"
         Me.txt_mybaseserviceimpl.Size = New System.Drawing.Size(329, 21)
         Me.txt_mybaseserviceimpl.TabIndex = 16
@@ -430,7 +451,7 @@ Partial Class Form1
         '
         'txt_contollerpackage
         '
-        Me.txt_contollerpackage.Location = New System.Drawing.Point(161, 353)
+        Me.txt_contollerpackage.Location = New System.Drawing.Point(161, 377)
         Me.txt_contollerpackage.Name = "txt_contollerpackage"
         Me.txt_contollerpackage.Size = New System.Drawing.Size(329, 21)
         Me.txt_contollerpackage.TabIndex = 15
@@ -447,7 +468,7 @@ Partial Class Form1
         '
         'txt_serviceimplpackage
         '
-        Me.txt_serviceimplpackage.Location = New System.Drawing.Point(161, 320)
+        Me.txt_serviceimplpackage.Location = New System.Drawing.Point(161, 344)
         Me.txt_serviceimplpackage.Name = "txt_serviceimplpackage"
         Me.txt_serviceimplpackage.Size = New System.Drawing.Size(329, 21)
         Me.txt_serviceimplpackage.TabIndex = 14
@@ -455,7 +476,7 @@ Partial Class Form1
         '
         'txt_servicepackage
         '
-        Me.txt_servicepackage.Location = New System.Drawing.Point(161, 278)
+        Me.txt_servicepackage.Location = New System.Drawing.Point(161, 302)
         Me.txt_servicepackage.Name = "txt_servicepackage"
         Me.txt_servicepackage.Size = New System.Drawing.Size(329, 21)
         Me.txt_servicepackage.TabIndex = 13
@@ -463,7 +484,7 @@ Partial Class Form1
         '
         'txt_mapperpackage
         '
-        Me.txt_mapperpackage.Location = New System.Drawing.Point(161, 245)
+        Me.txt_mapperpackage.Location = New System.Drawing.Point(161, 269)
         Me.txt_mapperpackage.Name = "txt_mapperpackage"
         Me.txt_mapperpackage.Size = New System.Drawing.Size(329, 21)
         Me.txt_mapperpackage.TabIndex = 12
@@ -471,7 +492,7 @@ Partial Class Form1
         '
         'txt_entitypackage
         '
-        Me.txt_entitypackage.Location = New System.Drawing.Point(161, 210)
+        Me.txt_entitypackage.Location = New System.Drawing.Point(161, 234)
         Me.txt_entitypackage.Name = "txt_entitypackage"
         Me.txt_entitypackage.Size = New System.Drawing.Size(329, 21)
         Me.txt_entitypackage.TabIndex = 11
@@ -480,7 +501,7 @@ Partial Class Form1
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(25, 356)
+        Me.Label7.Location = New System.Drawing.Point(25, 380)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(107, 12)
         Me.Label7.TabIndex = 10
@@ -489,7 +510,7 @@ Partial Class Form1
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(25, 320)
+        Me.Label6.Location = New System.Drawing.Point(25, 344)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(113, 12)
         Me.Label6.TabIndex = 9
@@ -498,7 +519,7 @@ Partial Class Form1
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(25, 281)
+        Me.Label5.Location = New System.Drawing.Point(25, 305)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(89, 12)
         Me.Label5.TabIndex = 8
@@ -507,7 +528,7 @@ Partial Class Form1
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(25, 245)
+        Me.Label4.Location = New System.Drawing.Point(25, 269)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(83, 12)
         Me.Label4.TabIndex = 7
@@ -516,7 +537,7 @@ Partial Class Form1
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(25, 210)
+        Me.Label3.Location = New System.Drawing.Point(25, 234)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(83, 12)
         Me.Label3.TabIndex = 6
@@ -638,5 +659,7 @@ Partial Class Form1
     Friend WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents txt_packagename As System.Windows.Forms.TextBox
     Friend WithEvents cmb_dbtype As System.Windows.Forms.ComboBox
+    Friend WithEvents Label12 As System.Windows.Forms.Label
+    Friend WithEvents txt_mybaseservice As System.Windows.Forms.TextBox
 
 End Class
